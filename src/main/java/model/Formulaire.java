@@ -14,6 +14,10 @@ public class Formulaire {
 		return new String[] { "formulaire_id", "Titre", "DateCreation", "DateLimite", "IntervalleRelance" };
 	}
 	
+	public static String getSchema() {
+		return "formulaire_id";
+	}
+	
 	public Formulaire(int formulaire_id, String titre, LocalDate dateCreation, LocalDate dateLimite,
 			int intervalleRelance) {
 		this.formulaire_id = formulaire_id;

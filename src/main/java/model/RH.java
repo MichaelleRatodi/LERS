@@ -1,12 +1,12 @@
 package model;
 
-public class RH extends Personne {
+public class RH extends Personnel {
 	
 	private String pseudo;
 	private String motDePasse;
 	
 	public static String[] getNameFields() {
-		return new String[] { "pseudo", "motDePasse" };
+		return new String[] { "personnel_id", "nom", "prenom", "email", "metier", "pseudo", "motDePasse" };
 	}
 	
 	public String getPseudo() {
