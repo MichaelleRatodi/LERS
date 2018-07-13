@@ -4,9 +4,18 @@ public class Choix {
 	
 	private int question_id;
 	private String libelle;
-
-	public static String[] getNameFields() {
-		return new String[] { "question_id", "libelle"};
+	
+	public static String getSchema() {
+		return "create table Choix (\r\n" + "question_id int not null references Question(question_id),\r\n"
+				+ "Libelle varchar(255) not null)";
+	}
+	
+	public static String getConstraints() {
+		return "\"choix_question_id_fkey\" FOREIGN KEY (question_id) REFERENCES question(question_id)";
+	}
+	
+	public static String[] getFields() {
+		return new String[] { "question_id", "libelle" };
 	}
 	
 	public int getQuestion_id() {

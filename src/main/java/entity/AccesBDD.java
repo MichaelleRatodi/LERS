@@ -92,7 +92,7 @@ public class AccesBDD {
 		
 		try {
 			Method method;
-			method = objet.getClass().getDeclaredMethod("getNameFields");
+			method = objet.getClass().getDeclaredMethod("getFields");
 			String[] arguments = (String[]) method.invoke(objet);
 			System.out.println("Requete : " + requete.toString());
 			Statement st;

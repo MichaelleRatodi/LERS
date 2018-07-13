@@ -3,10 +3,22 @@ package model;
 public class Reponse {
 	
 	private int question_id;
-	private int personne_id;
+	private int personnel_id;
+	private String contenuReponse;
 	
-	public static String[] getNameFields() {
-		return new String[] { "question_id", "personne_id" };
+	public static String getSchema() {
+		return "create table Reponse (\r\n" + "question_id int not null references Question(question_id),\r\n"
+				+ "personnel_id int not null references Personnel(personnel_id),\r\n"
+				+ "contenuReponse text not null)";
+	}
+	
+	public static String getConstraints() {
+		return "\"reponse_personnel_id_fkey\" FOREIGN KEY (personnel_id) REFERENCES personnel(personnel_id)\r\n"
+				+ "    \"reponse_question_id_fkey\" FOREIGN KEY (question_id) REFERENCES question(question_id)";
+	}
+	
+	public static String[] getFields() {
+		return new String[] { "question_id", "personnel_id", "contenuReponse" };
 	}
 	
 	public int getQuestion_id() {
@@ -17,12 +29,12 @@ public class Reponse {
 		this.question_id = question_id;
 	}
 	
-	public int getPersonne_id() {
-		return personne_id;
+	public int getPersonnel_id() {
+		return personnel_id;
 	}
 	
-	public void setPersonne_id(int personne_id) {
-		this.personne_id = personne_id;
+	public void setPersonnel_id(int personnel_id) {
+		this.personnel_id = personnel_id;
 	}
 	
 	public String getContenuReponse() {
@@ -33,5 +45,4 @@ public class Reponse {
 		this.contenuReponse = contenuReponse;
 	}
 	
-	private String contenuReponse;
 }

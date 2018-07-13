@@ -4,9 +4,18 @@ public class QuestionTexte extends Question {
 	
 	private int nbColonnesZoneTexte;
 	private int nbLignesZoneTexte;
+	
+	public static String getSchema() {
+		return "create table QuestionTexte (\r\n" + "NbColonnesZoneTexte int not null,\r\n"
+				+ "NbLignesZoneTexte int not null) inherits(Question)";
+	}
 
-	public static String[] getNameFields() {
-		return new String[] { "nbColonnesZoneTexte", "nbLignesZoneTexte" };
+	public static String getConstraints() {
+		return "";
+	}
+	
+	public static String[] getFields() {
+		return new String[] { "question_id", "formulaire_id", "nbColonnesZoneTexte", "nbLignesZoneTexte" };
 	}
 	
 	public int getNbColonnesZoneTexte() {
