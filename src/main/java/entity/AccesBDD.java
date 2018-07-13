@@ -15,16 +15,26 @@ import java.sql.Connection;
 
 public class AccesBDD {
 	
-	private static Connection connection;
+	/** Constructeur privé */
+    private AccesBDD()
+    {initConnection();}
+ 
+    /** Instance unique pré-initialisée */
+    private static AccesBDD INSTANCE = new AccesBDD();
+     
+    /** Point d'accès pour l'instance unique du singleton */
+    public static AccesBDD getInstance()
+    {   return INSTANCE;
+    }
+    
+	private Connection connection;
 	
-	public static Connection getConnection() {
+	public  Connection getConnection() {
 		
-		if (connection == null)
-			initConnection();
 		return connection;
 	}
 	
-	public static boolean initConnection() {
+	public boolean initConnection() {
 		
 		// Connexion database postgreSQL
 		String url = "jdbc:postgresql://localhost/projet";
@@ -44,90 +54,5 @@ public class AccesBDD {
 		return true;
 	}
 	
-	public static <T> boolean insererObjet(T objet) {
-		
-		boolean retour = false;
-		
-		StringBuilder requete = new StringBuilder("insert into " + objet.getClass().getSimpleName() + " (");
-		Method method;
-		try {
-			method = objet.getClass().getDeclaredMethod("getNameFields");
-			String[] arguments = (String[]) method.invoke(objet);
-			for (String argument : arguments) {
-				requete.append("\"" + argument.toLowerCase() + "\",");
-			}
-			requete.deleteCharAt(requete.length() - 1);
-			requete.append(") values (");
-			
-			for (String argument : arguments) {
-				
-				method = objet.getClass()
-						.getDeclaredMethod("get" + Character.toUpperCase(argument.charAt(0)) + argument.substring(1));
-				
-				if (method.invoke(objet) instanceof Integer)
-					requete.append(method.invoke(objet) + ",");
-				else
-					requete.append("'" + method.invoke(objet) + "',");
-			}
-			
-			requete.deleteCharAt(requete.length() - 1);
-			requete.append(")");
-			System.out.println("Requete : " + requete.toString());
-			Statement st;
-			st = connection.createStatement();
-			retour = st.execute(requete.toString());
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | SQLException e) {
-			e.printStackTrace();
-		}
-		return retour;
-	}
-	
-	public static <T> T recupererObjetParId(T objet, int idObjet) {
-		
-		T retour = objet;
-		
-		StringBuilder requete = new StringBuilder("select * from " + objet.getClass().getSimpleName().toLowerCase()
-				+ " where " + objet.getClass().getSimpleName().toLowerCase() + "_id = " + idObjet);
-		
-		try {
-			Method method;
-			method = objet.getClass().getDeclaredMethod("getNameFields");
-			String[] arguments = (String[]) method.invoke(objet);
-			System.out.println("Requete : " + requete.toString());
-			Statement st;
-			st = connection.createStatement();
-			ResultSet rs = st.executeQuery(requete.toString());
-			ResultSetMetaData rsmd = rs.getMetaData();
-			
-			while (rs.next()) {
-				for (int i = 1; i < rsmd.getColumnCount() + 1; i++) {
-					String columnType = rsmd.getColumnTypeName(i);
-					System.out.println(columnType);
-					method = objet.getClass().getDeclaredMethod(
-							"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1));
-					switch (columnType) {
-					case "serial":
-					case "int4":
-						method.invoke(objet, rs.getInt(i));
-						break;
-					case "varchar":
-						method.invoke(objet, rs.getString(i));
-						break;
-					case "timestamp":
-						String date = rs.getString(i);
-						method.invoke(objet, LocalDate.of(Integer.parseInt(date.substring(0, 4)),
-								Integer.parseInt(date.substring(6, 8)), Integer.parseInt(date.substring(10, 12))));
-						break;
-					}
-				}
-			}
-		} catch (IllegalAccessException | InvocationTargetException | SecurityException | NoSuchMethodException
-				| IllegalArgumentException | SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return retour;
-	}
-	
+
 }

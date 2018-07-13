@@ -1,6 +1,6 @@
 package model;
 
-public class RH extends Personne {
+public class RH {
 	
 	private String pseudo;
 	private String motDePasse;

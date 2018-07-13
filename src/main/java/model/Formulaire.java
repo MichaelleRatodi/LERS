@@ -66,7 +66,7 @@ public class Formulaire {
 	public void setIntervalleRelance(int intervalleRelance) {
 		this.intervalleRelance = intervalleRelance;
 	}
-	public String getSchema() {
+	public static String getSchema() {
 		return "create table Formulaire (" + 
 				"id serial primary key," + 
 				"Titre varchar(255) not null," + 
