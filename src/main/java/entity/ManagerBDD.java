@@ -9,13 +9,13 @@ import java.sql.Statement;
 import java.time.LocalDate;
 
 import model.Choix;
-import model.Formulaire;
 import model.Liste;
 import model.ListePersonnel;
 import model.Personnel;
 import model.Question;
 import model.QuestionChoix;
 import model.QuestionTexte;
+import model.Questionnaire;
 import model.RH;
 import model.Reponse;
 
@@ -108,10 +108,10 @@ public class ManagerBDD {
 	
 	public void createBDD() {
 		try {
-			Formulaire.getSchema();
+			Questionnaire.getSchema();
 			Statement st;
 			st = AccesBDD.getInstance().getConnection().createStatement();
-			st.execute(Formulaire.getSchema());
+			st.execute(Questionnaire.getSchema());
 			
 			Choix.getSchema();
 			st = AccesBDD.getInstance().getConnection().createStatement();
