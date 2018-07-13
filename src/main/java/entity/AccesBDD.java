@@ -15,17 +15,16 @@ import java.sql.Connection;
 
 public class AccesBDD {
 	
-	private Connection connection;
+	private static Connection connection;
 	
-	public Connection getConnection() {
+	public static Connection getConnection() {
+		
+		if (connection == null)
+			initConnection();
 		return connection;
 	}
 	
-	public void setConnection(Connection connection) {
-		this.connection = connection;
-	}
-	
-	public boolean initConnection() {
+	public static boolean initConnection() {
 		
 		// Connexion database postgreSQL
 		String url = "jdbc:postgresql://localhost/projet";
@@ -35,7 +34,7 @@ public class AccesBDD {
 		
 		// Create the connection to our database.
 		try {
-			this.connection = DriverManager.getConnection(url, props);
+			connection = DriverManager.getConnection(url, props);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("Problème avec la base de données : " + e.getMessage());
@@ -45,7 +44,7 @@ public class AccesBDD {
 		return true;
 	}
 	
-	public static <T> boolean insererObjet(Connection connection, T objet) {
+	public static <T> boolean insererObjet(T objet) {
 		
 		boolean retour = false;
 		
@@ -84,7 +83,7 @@ public class AccesBDD {
 		return retour;
 	}
 	
-	public static <T> T recupererObjetParId(Connection connection, T objet, int idObjet) {
+	public static <T> T recupererObjetParId(T objet, int idObjet) {
 		
 		T retour = objet;
 		
@@ -100,6 +99,7 @@ public class AccesBDD {
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(requete.toString());
 			ResultSetMetaData rsmd = rs.getMetaData();
+			
 			while (rs.next()) {
 				for (int i = 1; i < rsmd.getColumnCount() + 1; i++) {
 					String columnType = rsmd.getColumnTypeName(i);
