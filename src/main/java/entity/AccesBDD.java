@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
-//import org.postgresql.Driver;
+import org.postgresql.Driver;
 
 public class AccesBDD {
 	
@@ -30,7 +30,7 @@ public class AccesBDD {
 		String url = "jdbc:postgresql://localhost/projet";
 		Properties props = new Properties();
 		props.setProperty("user", "postgres");
-		props.setProperty("password", "postgres");
+		props.setProperty("password", "1234");
 		
 		// Create the connection to our database.
 		try {
@@ -89,12 +89,12 @@ public class AccesBDD {
 		
 		StringBuilder requete = new StringBuilder("select * from " + objet.getClass().getSimpleName().toLowerCase()
 				+ " where " + objet.getClass().getSimpleName().toLowerCase() + "_id = " + idObjet);
-		
+		System.out.println("Requete : " + requete.toString());
 		try {
 			Method method;
 			method = objet.getClass().getDeclaredMethod("getNameFields");
 			String[] arguments = (String[]) method.invoke(objet);
-			System.out.println("Requete : " + requete.toString());
+			
 			Statement st;
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(requete.toString());
@@ -125,6 +125,7 @@ public class AccesBDD {
 		} catch (IllegalAccessException | InvocationTargetException | SecurityException | NoSuchMethodException
 				| IllegalArgumentException | SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 		return retour;
