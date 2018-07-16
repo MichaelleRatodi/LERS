@@ -7,11 +7,11 @@ import entity.AccesBDD;
 import model.Questionnaire;
 
 public class Projet {
-	
+
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		System.out.println("Classe d'exécution du projet");
-		
-		AccesBDD abdd = new AccesBDD();
+
+		AccesBDD abdd = AccesBDD.getInstance();
 		
 		abdd.createBDD();
 		
@@ -37,5 +37,5 @@ public class Projet {
 		System.out.println(quests.get(0).getDateCreation());
 		System.out.println(quests.get(1).getDateCreation());
 	}
-	
+
 }

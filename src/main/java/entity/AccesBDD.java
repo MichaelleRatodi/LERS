@@ -28,12 +28,22 @@ import java.sql.Connection;
 
 public class AccesBDD {
 	
-	private static Connection connection;
+	/** Constructeur privé */
+    private AccesBDD()
+    {initConnection();}
+ 
+    /** Instance unique pré-initialisée */
+    private static AccesBDD INSTANCE = new AccesBDD();
+     
+    /** Point d'accès pour l'instance unique du singleton */
+    public static AccesBDD getInstance()
+    {   return INSTANCE;
+    }
+    
+	private Connection connection;
 	
 	public Connection getConnection() {
 		
-		if (connection == null)
-			initConnection();
 		return connection;
 	}
 	
@@ -132,7 +142,7 @@ public class AccesBDD {
 					+ " where " + objet.getClass().getSimpleName().toLowerCase() + "_id = " + idObjet);
 			
 			Method method;
-			method = objet.getClass().getDeclaredMethod("getFields");
+			method = objet.getClass().getDeclaredMethod("getNameFields");
 			String[] arguments = (String[]) method.invoke(objet);
 			Statement st;
 			st = connection.createStatement();

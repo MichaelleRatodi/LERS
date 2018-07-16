@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,22 +9,13 @@ import application.documents.DocumentsViewController;
 import application.employee.EmployeeViewController;
 import application.login.LoginManager;
 import application.users.UserInfoController;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import model.RH;
 
 /** Controls the main application screen */

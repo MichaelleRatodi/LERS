@@ -8,6 +8,10 @@ public class Personnel {
 	private String email;
 	private String metier;
 	
+	public static String[] getNameFields() {
+		return new String[] { "personnel_id", "nom", "prenom", "email", "metier"};
+	}
+	
 	public static String getSchema() {
 		return "create table Personnel (\r\n" + "personnel_id serial primary key,\r\n" + "Nom varchar(20) not null,\r\n"
 				+ "Prenom varchar(20) not null,\r\n" + "Email varchar(50) not null unique,\r\n"

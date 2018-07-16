@@ -1,9 +1,5 @@
 package application.documents;
 
-import java.sql.ResultSet;
-
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 
 import application.MainViewController;
@@ -70,7 +66,7 @@ public class DocumentsViewController extends MainViewController {
 	}
 	
 	private void saveQuestionnaire(Questionnaire questionnaire) {
-		AccesBDD abdd = new AccesBDD();
+		AccesBDD abdd = AccesBDD.getInstance();
 		abdd.initConnection();
 		abdd.insererObjet(questionnaire);
 	}
