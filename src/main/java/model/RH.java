@@ -18,6 +18,46 @@ public class RH extends Personnel {
 	public static String[] getFields() {
 		return new String[] { "personnel_id", "nom", "prenom", "email", "metier", "pseudo", "motDePasse" };
 	}
+
+	public int getPersonnel_id() {
+		return super.getPersonnel_id();
+	}
+	
+	public void setPersonnel_id(int personnel_id) {
+		super.setPersonnel_id(personnel_id);
+	}
+	
+	public String getNom() {
+		return super.getNom();
+	}
+	
+	public void setNom(String nom) {
+		super.setNom(nom);
+	}
+	
+	public String getPrenom() {
+		return super.getPrenom();
+	}
+	
+	public void setPrenom(String prenom) {
+		super.setPrenom(prenom);
+	}
+	
+	public String getEmail() {
+		return super.getEmail();
+	}
+	
+	public void setEmail(String email) {
+		super.setEmail(email);
+	}
+	
+	public String getMetier() {
+		return super.getMetier();
+	}
+	
+	public void setMetier(String metier) {
+		super.setMetier(metier);
+	}
 	
 	public String getPseudo() {
 		return pseudo;

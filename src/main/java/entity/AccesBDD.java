@@ -10,6 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import model.Choix;
+import model.Liste;
+import model.ListePersonnel;
+import model.Personnel;
+import model.Question;
+import model.QuestionChoix;
+import model.QuestionTexte;
+import model.Questionnaire;
+import model.RH;
+import model.Reponse;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -39,7 +50,7 @@ public class AccesBDD {
 			connection = DriverManager.getConnection(url, props);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Probl�me avec la base de donn�es : " + e.getMessage());
+			System.err.println("Problème avec la base de données : " + e.getMessage());
 			System.exit(-2);
 			return false;
 		}
@@ -48,9 +59,16 @@ public class AccesBDD {
 	
 	public <T> void insererObjet(T objet) {
 		
-		StringBuilder requete = new StringBuilder("insert into " + objet.getClass().getSimpleName() + " (");
-		Method method;
 		try {
+			StringBuilder requete = new StringBuilder("select count(*) from "+objet.getClass().getSimpleName().toLowerCase());
+			
+			Statement st;
+			st = connection.createStatement();
+			ResultSet rs = st.executeQuery(requete.toString());
+			rs.next();
+			int newIndex = rs.getInt(1);
+			requete = new StringBuilder("insert into " + objet.getClass().getSimpleName() + " (");
+			Method method;
 			method = objet.getClass().getDeclaredMethod("getFields");
 			String[] arguments = (String[]) method.invoke(objet);
 			for (String argument : arguments) {
@@ -64,15 +82,17 @@ public class AccesBDD {
 				method = objet.getClass()
 						.getDeclaredMethod("get" + Character.toUpperCase(argument.charAt(0)) + argument.substring(1));
 				
-				if (method.invoke(objet) instanceof Integer)
-					requete.append(method.invoke(objet) + ",");
-				else
+				if (method.invoke(objet) instanceof Integer) {
+					if (argument.substring(argument.length() - 3).equals("_id"))
+						requete.append(newIndex + ",");
+					else
+						requete.append(method.invoke(objet) + ",");
+				} else
 					requete.append("'" + method.invoke(objet) + "',");
 			}
 			
 			requete.deleteCharAt(requete.length() - 1);
 			requete.append(")");
-			Statement st;
 			st = connection.createStatement();
 			st.execute(requete.toString());
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
@@ -205,6 +225,73 @@ public class AccesBDD {
 			e.printStackTrace();
 		}
 		return retour;
+	}
+	
+	public void createBDD() {
+		try {
+			// Connexion database postgreSQL
+			String url = "jdbc:postgresql://localhost/";
+			Properties props = new Properties();
+			props.setProperty("user", "postgres");
+			props.setProperty("password", "postgres");
+			
+			// Create the connection to our database.
+			connection = DriverManager.getConnection(url, props);
+			
+			Statement st = connection.createStatement();
+			
+			st.execute("drop database if exists projet");
+			
+			st.execute("create database projet");
+			
+			connection.close();
+			
+			url = "jdbc:postgresql://localhost/projet";
+			
+			connection = DriverManager.getConnection(url, props);
+			
+			st = connection.createStatement();
+			
+			st.execute(Questionnaire.getSchema());
+			
+			st.execute(Liste.getSchema());
+			
+			st.execute(Personnel.getSchema());
+
+			st.execute(ListePersonnel.getSchema());
+			
+			st.execute(Question.getSchema());
+
+			st.execute(Choix.getSchema());
+			
+			st.execute(QuestionChoix.getSchema());
+			
+			st.execute(QuestionTexte.getSchema());
+			
+			st.execute(Reponse.getSchema());
+			
+			st.execute(RH.getSchema());
+			
+			st.execute("insert into RH values\r\n"
+					+ "(1, 'Bréhu', 'Soraya', 'soraya.brehu@gmail.com', 'RH', 'linda', '1234'),\r\n"
+					+ "(2, 'Ratodiarivony', 'Michaëlle', 'michaelle.ratodi@gmail.com', 'RH', 'michaelle', 'michaelle'),\r\n"
+					+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu')");
+			
+			st.execute("insert into Personnel values \r\n" + "(1, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
+					+ "(2, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
+					+ "(3, 'Lucas','HERNANDEZ', 'lucas.tata@gmail.com', 'employee1'),\r\n"
+					+ "(4, 'Steve' ,'MANDANDA', 'steve.tata@gmail.com', 'employee2'),\r\n"
+					+ "(5, 'Benjamin','MENDY', 'b2@gmail.com', 'employee3'),\r\n"
+					+ "(6, 'Samuel','UMTITI', 's1.tata@gmail.com', 'employee4'),\r\n"
+					+ "(7, 'Adil','RAMI', 'a.r@gmail.com', 'employee5'),\r\n"
+					+ "(8, 'Olivier','GIROUD', 'o.g.tata@gmail.com', 'employee6'),\r\n"
+					+ "(9, 'Nabil','FEKIR', 'n.f@gmail.com', 'employee7'),\r\n"
+					+ "(10, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
+			
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

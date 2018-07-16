@@ -12,13 +12,16 @@ public class Projet {
 		System.out.println("Classe d'exécution du projet");
 		
 		AccesBDD abdd = new AccesBDD();
+		
+		abdd.createBDD();
+		
 		abdd.initConnection();
 		
-		Questionnaire quest = new Questionnaire(1, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		Questionnaire quest = new Questionnaire(1, "Essai1", LocalDate.now(), LocalDate.now().plusDays(2), 2);
 		abdd.insererObjet(quest);
-		quest = new Questionnaire(2, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		quest = new Questionnaire(2, "Essai2", LocalDate.now(), LocalDate.now().plusDays(2), 2);
 		abdd.insererObjet(quest);
-		quest = new Questionnaire(3, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		quest = new Questionnaire(3, "Essai3", LocalDate.now(), LocalDate.now().plusDays(2), 2);
 		abdd.insererObjet(quest);
 		abdd.supprimerObjet(quest);
 		
