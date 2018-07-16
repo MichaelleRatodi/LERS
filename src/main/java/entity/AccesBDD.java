@@ -39,7 +39,7 @@ public class AccesBDD {
 			connection = DriverManager.getConnection(url, props);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Problème avec la base de données : " + e.getMessage());
+			System.err.println("Problï¿½me avec la base de donnï¿½es : " + e.getMessage());
 			System.exit(-2);
 			return false;
 		}

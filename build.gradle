@@ -23,9 +23,8 @@ mainClassName = 'Projet'
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
-    //compile 'mysql:mysql-connector-java:8.0.11'
-    //compile group: 'mysql', name: 'mysql-connector-java', version: '5.0.8'
-
+    compile 'postgresql:postgresql:42.2.2'
+    compile group: 'postgresql', name: 'postgresql', version: '42.2.2'
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
