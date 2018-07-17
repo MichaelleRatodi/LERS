@@ -13,10 +13,6 @@ public class Projet {
 
 		AccesBDD abdd = AccesBDD.getInstance();
 		
-		abdd.createBDD();
-		
-		abdd.initConnection();
-		
 		Questionnaire quest = new Questionnaire(1, "Essai1", LocalDate.now(), LocalDate.now().plusDays(2), 2);
 		abdd.insererObjet(quest);
 		quest = new Questionnaire(2, "Essai2", LocalDate.now(), LocalDate.now().plusDays(2), 2);

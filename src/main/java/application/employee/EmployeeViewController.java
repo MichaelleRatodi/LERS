@@ -1,5 +1,7 @@
 package application.employee;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,15 @@ import application.login.LoginManager;
 import entity.AccesBDD;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,17 +27,36 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import model.Personnel;
 import model.RH;
 
 /** Controls the main application screen */
 public class EmployeeViewController extends MainViewController {
 	
+	private Scene scene;
+	
+	private Stage create;
+	
 	private List<Personnel> employeeList = new ArrayList<>();
 	private List<Label> labelList = new ArrayList<>();
 	@FXML
 	private ImageView home = new ImageView();
+	@FXML
+	private Button add = new Button();
+	@FXML
+	private TextField nom = new TextField();
+	@FXML
+	private TextField prenom = new TextField();
+	@FXML
+	private TextField email = new TextField();
+	@FXML
+	private TextField metier = new TextField();
+	@FXML
+	private Button enregistrerBouton = new Button();
 	@FXML
 	private AnchorPane listEmployee = new AnchorPane();
 	
@@ -41,6 +67,14 @@ public class EmployeeViewController extends MainViewController {
 			public void handle(MouseEvent event) {
 				
 				loginManager.showMainView(sessionId, user);
+			}
+		});
+		
+		add.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				
+				showUserCreateView(loginManager, sessionId, user);
 			}
 		});
 		
@@ -85,8 +119,25 @@ public class EmployeeViewController extends MainViewController {
 		hbowTop.getChildren().add(vbox1);
 		hbowTop.getChildren().add(vbox2);
 		listEmployee.getChildren().add(hbowTop);
+		((Stage) loginManager.getScene().getWindow()).setMaximized(true);
 		// listEmployee.getParent().prefWidth(primaryScreenBounds.getWidth() - 200);
 		// listEmployee.getParent().prefHeight(primaryScreenBounds.getHeight() - 200);
+	}
+	
+	public void initializeUser(LoginManager loginManager, RH user, String sessionId, Stage stage) {
+		super.initialize(loginManager, user, sessionId);
+		
+		create = stage;
+		
+		enregistrerBouton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				ajouterUserDB();
+				create.close();
+				loginManager.showMainView(sessionId, user);
+			}
+		});
+		
 	}
 	
 	private List<Personnel> getPersonnelListFromDB() {
@@ -98,6 +149,38 @@ public class EmployeeViewController extends MainViewController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void showUserCreateView(LoginManager loginManager, String sessionId, RH user) {
+		create = new Stage();
+		create.initModality(Modality.APPLICATION_MODAL);
+		create.initOwner((Stage) loginManager.getScene().getWindow());
+		VBox dialogVbox = new VBox(20);
+		dialogVbox.getChildren().add(new Text("Nouveau Personnel"));
+		scene = new Scene(dialogVbox, 400, 600);
+		create.setScene(scene);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("employeecreate.fxml"));
+		try {
+			scene.setRoot((Parent) loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		EmployeeViewController controller = loader.<EmployeeViewController>getController();
+		controller.initializeUser(loginManager, user, sessionId, create);
+		create.centerOnScreen();
+		create.show();
+	}
+	
+	private void ajouterUserDB() {
+		System.out.println("ajouterUserDB");
+		Personnel newUser = new Personnel();
+		newUser.setNom(this.nom.getText());
+		newUser.setPrenom(this.prenom.getText());
+		newUser.setEmail(this.email.getText());
+		newUser.setMetier(this.metier.getText());
+		
+		AccesBDD abdd = AccesBDD.getInstance();
+		abdd.insererObjet(newUser);
 	}
 	
 }
