@@ -2,8 +2,9 @@ package defaultPackage;
 
 import java.time.LocalDate;
 
+
 import entity.AccesBDD;
-import model.Formulaire;
+import model.Questionnaire;
 
 public class Projet {
 	
@@ -13,10 +14,17 @@ public class Projet {
 		AccesBDD abdd = new AccesBDD();
 		abdd.initConnection();
 		
+<<<<<<< HEAD
 		Formulaire form = new Formulaire(1, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
 		 System.out.println(AccesBDD.insererObjet(form));
 		
 		System.out.println(AccesBDD.recupererObjetParId(form, 1));
+=======
+		Questionnaire quest = new Questionnaire(2, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		System.out.println(AccesBDD.insererObjet(quest));
+		
+		System.out.println(abdd.recupererObjetParId(new Questionnaire(), 1));
+>>>>>>> mathieu
 	}
 	
 }
