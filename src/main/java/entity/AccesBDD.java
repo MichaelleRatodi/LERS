@@ -200,6 +200,7 @@ public class AccesBDD {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			
 			while (rs.next()) {
+				@SuppressWarnings("unchecked")
 				T item = (T) objet.getClass().newInstance();
 				for (int i = 0; i < arguments.length; i++) {
 					String columnType = rsmd.getColumnTypeName(i + 1);

@@ -92,7 +92,6 @@ public class EmployeeViewController extends MainViewController {
 	private List<Personnel> getPersonnelListFromDB() {
 		
 		AccesBDD abdd = AccesBDD.getInstance();
-		abdd.initConnection();
 		try {
 			return abdd.recupererTousObjets(new Personnel());
 		} catch (InstantiationException | IllegalAccessException e) {

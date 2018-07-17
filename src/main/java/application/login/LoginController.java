@@ -58,7 +58,6 @@ public class LoginController {
 	private String authorize() {
 		
 		AccesBDD abdd = AccesBDD.getInstance();
-		abdd.initConnection();
 		System.out.println("user: " + this.user.getText() + " password: " + this.password.getText());
 		try {
 			List<RH> listRH = abdd.recupererTousObjets(new RH());

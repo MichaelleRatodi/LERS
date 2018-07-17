@@ -67,7 +67,6 @@ public class DocumentsViewController extends MainViewController {
 	
 	private void saveQuestionnaire(Questionnaire questionnaire) {
 		AccesBDD abdd = AccesBDD.getInstance();
-		abdd.initConnection();
 		abdd.insererObjet(questionnaire);
 	}
 	
