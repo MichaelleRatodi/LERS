@@ -33,7 +33,7 @@ public class LoginController {
 				
 				String sessionID = authorize();
 				if (sessionID != null)
-					loginManager.authenticated(sessionID, userConnected);
+					loginManager.authenticated(userConnected);
 				else
 					loginManager.showLoginScreen();
 			}

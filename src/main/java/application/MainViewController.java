@@ -34,43 +34,43 @@ public class MainViewController extends UserInfoController {
 	@FXML
 	private ImageView settings = new ImageView();
 	
-	public void initSessionID(LoginManager loginManager, String sessionID, RH user) {
-		super.initialize(loginManager, user, sessionID);
+	public void initSessionID(LoginManager loginManager, RH user) {
+		super.initialize(loginManager, user);
 		usernameLabel.setText(user.getPseudo());
 		documents.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				showDocumentsView(loginManager, sessionID, user);
+				showDocumentsView(loginManager, user);
 			}
 		});
 		employees.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				showEmployeeView(loginManager, sessionID, user);
+				showEmployeeView(loginManager, user);
 			}
 		});
 		
 	}
 	
-	private void showDocumentsView(LoginManager loginManager, String sessionID, RH user) {
+	private void showDocumentsView(LoginManager loginManager, RH user) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("./documents/docsview.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());
 			DocumentsViewController controller = loader.<DocumentsViewController>getController();
-			controller.initialize(loginManager, user, sessionID);
+			controller.initialize(loginManager, user);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 	
-	private void showEmployeeView(LoginManager loginManager, String sessionID, RH user) {
+	private void showEmployeeView(LoginManager loginManager, RH user) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("./employee/employeeview.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());
 			EmployeeViewController controller = loader.<EmployeeViewController>getController();
-			controller.initialize(loginManager, user, sessionID);
+			controller.initialize(loginManager, user);
 			((Stage) loginManager.getScene().getWindow()).setMaximized(true);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);

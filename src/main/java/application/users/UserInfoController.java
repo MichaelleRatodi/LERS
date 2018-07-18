@@ -31,12 +31,10 @@ public class UserInfoController {
 		this.user = user;
 	}
 	
-	private String sessionID;
 	private LoginManager loginManager;
 	
-	public void initialize(LoginManager loginManager, RH user, String sessionID) {
+	public void initialize(LoginManager loginManager, RH user) {
 		this.user = user;
-		this.sessionID = sessionID;
 		this.loginManager = loginManager;
 		img.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
@@ -61,7 +59,6 @@ public class UserInfoController {
 		dialogVbox.getChildren().add(new Text("FirstName: " + user.getPrenom()));
 		dialogVbox.getChildren().add(new Text("Name: " + user.getNom()));
 		dialogVbox.getChildren().add(new Text("email: " + user.getEmail()));
-		dialogVbox.getChildren().add(new Text("Session:" + sessionID));
 		Button logout = new Button("Logout");
 		logout.setOnAction(new EventHandler<ActionEvent>() {
 			@Override

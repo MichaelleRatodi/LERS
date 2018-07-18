@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.*;
 
 import application.MainViewController;
+import application.employee.EmployeeViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.Stage;
@@ -25,8 +26,8 @@ public class LoginManager {
 	 * Callback method invoked to notify that a user has been authenticated. Will
 	 * show the main application screen.
 	 */
-	public void authenticated(String sessionID, RH user) {
-		showMainView(sessionID, user);
+	public void authenticated(RH user) {
+		showMainView(user);
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class LoginManager {
 		}
 	}
 	
-	public void showMainView(String sessionID, RH user) {
+	public void showMainView(RH user) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainview.fxml"));
 			scene.setRoot((Parent) loader.load());
@@ -77,18 +78,33 @@ public class LoginManager {
 			stage.centerOnScreen();
 			stage.setMaximized(true);
 			MainViewController controller = loader.<MainViewController>getController();
-			controller.initSessionID(this, sessionID, user);
+			controller.initSessionID(this, user);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 	
-	public void showUserInfo(String sessionID, RH user) {
+	public void showUserList(RH user) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../employee/employeeview.fxml"));
+			scene.setRoot((Parent) loader.load());
+			Stage stage = (Stage) scene.getWindow();
+			stage.centerOnScreen();
+			stage.setMaximized(true);
+			EmployeeViewController controller = loader.<EmployeeViewController>getController();
+			
+			controller.initialize(this, user);
+		} catch (IOException ex) {
+			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public void showUserInfo(RH user) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../users/userInfo.fxml"));
 			scene.setRoot((Parent) loader.load());
 			MainViewController controller = loader.<MainViewController>getController();
-			controller.initialize(this, user, sessionID);
+			controller.initialize(this, user);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}

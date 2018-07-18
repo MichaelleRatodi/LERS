@@ -29,8 +29,8 @@ public class DocumentsViewController extends MainViewController {
 	
 	private Questionnaire questionnaire;
 	
-	public void initialize(LoginManager loginManager, RH user, String sessionId) {
-		super.initialize(loginManager, user, sessionId);
+	public void initialize(LoginManager loginManager, RH user) {
+		super.initialize(loginManager, user);
 		questionnaire = new Questionnaire();
 		home.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
