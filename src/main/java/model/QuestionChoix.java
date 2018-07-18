@@ -13,7 +13,31 @@ public class QuestionChoix extends Question {
 	}
 	
 	public static String[] getFields() {
-		return new String[] { "question_id", "formulaire_id", "plusieursChoix" };
+		return new String[] { "question_id", "formulaire_id", "libelle", "plusieursChoix" };
+	}
+	
+	public int getQuestion_id() {
+		return super.getQuestion_id();
+	}
+	
+	public void setQuestion_id(int question_id) {
+		super.setQuestion_id(question_id);
+	}
+	
+	public int getFormulaire_id() {
+		return super.getFormulaire_id();
+	}
+	
+	public void setFormulaire_id(int formulaire_id) {
+		super.setFormulaire_id(formulaire_id);
+	}
+	
+	public String getLibelle() {
+		return super.getLibelle();
+	}
+	
+	public void setLibelle(String libelle) {
+		super.setLibelle(libelle);
 	}
 	
 	public boolean getPlusieursChoix() {

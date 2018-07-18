@@ -1,30 +1,37 @@
 package defaultPackage;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 import entity.AccesBDD;
 import model.Questionnaire;
 
 public class Projet {
-	
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 		System.out.println("Classe d'exécution du projet");
+
+		AccesBDD abdd = AccesBDD.getInstance();
 		
-		AccesBDD abdd = new AccesBDD();
-		abdd.initConnection();
+		Questionnaire quest = new Questionnaire(1, "Essai1", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		abdd.insererObjet(quest);
+		quest = new Questionnaire(2, "Essai2", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		abdd.insererObjet(quest);
+		quest = new Questionnaire(3, "Essai3", LocalDate.now(), LocalDate.now().plusDays(2), 2);
+		abdd.insererObjet(quest);
+		abdd.supprimerObjet(quest);
 		
-<<<<<<< HEAD
-		Formulaire form = new Formulaire(1, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
-		 System.out.println(AccesBDD.insererObjet(form));
 		
-		System.out.println(AccesBDD.recupererObjetParId(form, 1));
-=======
-		Questionnaire quest = new Questionnaire(2, "Essai", LocalDate.now(), LocalDate.now().plusDays(2), 2);
-		System.out.println(AccesBDD.insererObjet(quest));
+		quest = abdd.recupererObjetParId(new Questionnaire(), 1);
+		System.out.println(quest.getQuestionnaire_id());
+		System.out.println(quest.getDateCreation());
 		
-		System.out.println(abdd.recupererObjetParId(new Questionnaire(), 1));
->>>>>>> mathieu
+		List<Questionnaire> quests = abdd.recupererTousObjets(new Questionnaire());
+		System.out.println(quests);
+		System.out.println(quests.size());
+		System.out.println(quests.isEmpty());
+		System.out.println(quests.get(0).getDateCreation());
+		System.out.println(quests.get(1).getDateCreation());
 	}
-	
+
 }
