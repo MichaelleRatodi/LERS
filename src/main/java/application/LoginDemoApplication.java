@@ -22,7 +22,7 @@ public class LoginDemoApplication extends Application {
 		loginManager.showLoginScreen();
 		
 		stage.setScene(scene);
-		
+		stage.setTitle("LERS");
 		stage.show();
 		
 	}

@@ -70,7 +70,7 @@
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="520.0" prefWidth="1114.0">
+                  <VBox fx:id="listeQuestions" prefHeight="520.0" prefWidth="1114.0">
                      <children>
                         <HBox prefHeight="26.0" prefWidth="822.0" spacing="20.0">
                            <children>
@@ -81,20 +81,20 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </HBox>
-                        <TitledPane animated="false" prefHeight="591.0" prefWidth="762.0" text="Question">
+                        <TitledPane collapsible="true" animated="false" prefHeight="310.0" prefWidth="810.0" text="Question">
                           <content>
-                            <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="511.0" prefWidth="1113.0">
+                            <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="800.0">
                                  <children>
-                                    <TextField fx:id="questionLabel" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="663.0" promptText="Wording question" />
+                                    <TextField fx:id="questionLabel" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="500.0" promptText="Wording question" />
                                     <RadioButton fx:id="multipleChoice" layoutX="23.0" layoutY="56.0" mnemonicParsing="false" selected="true" text="Multiple choices Question">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="choicetype" />
                                        </toggleGroup>
                                      </RadioButton>
-                                    <TextField layoutX="41.0" layoutY="88.0" prefHeight="26.0" prefWidth="637.0" promptText="Choice answer example" text="Choice answer example" />
-                                    <Button layoutX="41.0" layoutY="125.0" mnemonicParsing="false" text="Add choice" />
+                                    <TextField fx:id="addLabelChoice" layoutX="41.0" layoutY="88.0" prefHeight="26.0" prefWidth="50.0" promptText="Choice answer example" text="" />
+                                    <Button fx:id="addChoice" layoutX="41.0" layoutY="125.0" mnemonicParsing="false" text="Add choice" />
                                     <RadioButton fx:id="freeChoice" layoutX="23.0" layoutY="162.0" mnemonicParsing="false" text="Free answer question" toggleGroup="$choicetype" />
-                                  	<TextArea layoutX="23.0" layoutY="198.0" prefHeight="222.0" prefWidth="658.0" promptText="text reponse example" />
+                                  	<TextArea layoutX="23.0" layoutY="198.0" prefHeight="100.0" prefWidth="500.0" promptText="text reponse example" />
                                   </children>
                               </AnchorPane>
                           </content>
