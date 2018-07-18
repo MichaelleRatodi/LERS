@@ -49,7 +49,7 @@ public class AccesBDD {
 	
 	private boolean initConnection() {
 		
-		createBDD();
+		//createBDD();
 		
 		// Connexion database postgreSQL
 		String url = "jdbc:postgresql://localhost/projet";
@@ -97,11 +97,9 @@ public class AccesBDD {
 				method = objet.getClass()
 						.getDeclaredMethod("get" + Character.toUpperCase(argument.charAt(0)) + argument.substring(1));
 				
-				if (method.invoke(objet) instanceof Integer) {
-					if (argument.substring(argument.length() - 3).equals("_id"))
-						requete.append(newIndex + ",");
-					else
-						requete.append(method.invoke(objet) + ",");
+				if ((method.invoke(objet) instanceof Integer) && (argument.substring(0, argument.length() - 3))
+						.equals(objet.getClass().getSimpleName().toLowerCase())) {
+					requete.append(newIndex + ",");
 				} else
 					requete.append("'" + method.invoke(objet) + "',");
 			}
@@ -140,6 +138,44 @@ public class AccesBDD {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public <T> void majObjet(T objet) {
+		
+		try {
+			Method method;
+			method = objet.getClass().getDeclaredMethod("get" + objet.getClass().getSimpleName() + "_id");
+			int idToMAJ = (int) method.invoke(objet);
+			StringBuilder requete = new StringBuilder("update " + objet.getClass().getSimpleName() + " set ");
+			
+			method = objet.getClass().getDeclaredMethod("getFields");
+			
+			String[] arguments = (String[]) method.invoke(objet);
+			
+			for (String argument : arguments) {
+				if (!(argument.substring(0, argument.length() - 3))
+						.equals(objet.getClass().getSimpleName().toLowerCase())) {
+					
+					requete.append("" + argument.toLowerCase() + " = ");
+					
+					method = objet.getClass().getDeclaredMethod(
+							"get" + Character.toUpperCase(argument.charAt(0)) + argument.substring(1));
+					
+					requete.append("'" + method.invoke(objet) + "',");
+				}
+			}
+			
+			requete.deleteCharAt(requete.length() - 1);
+			
+			requete.append(" where " + objet.getClass().getSimpleName().toLowerCase() + "_id = " + idToMAJ);
+			
+			Statement st = connection.createStatement();
+			st.execute(requete.toString());
+			
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public <T> T recupererObjetParId(T objet, int idObjet) throws InstantiationException, IllegalAccessException {
@@ -245,8 +281,9 @@ public class AccesBDD {
 		return retour;
 	}
 	
-	private void createBDD() {
+	public void createBDD() {
 		try {
+			connection.close();
 			
 			// Connexion database postgreSQL
 			String url = "jdbc:postgresql://localhost/";
