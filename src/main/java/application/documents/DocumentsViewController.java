@@ -67,7 +67,7 @@ public class DocumentsViewController extends MainViewController {
 	private int nbQuestions;
 	
 	public void initialize(LoginManager loginManager, RH user, String sessionId) {
-		super.initialize(loginManager, user, sessionId);
+		super.initialize(loginManager, user);
 		questionnaire = new Questionnaire();
 		// question = new Question();
 		
@@ -75,7 +75,7 @@ public class DocumentsViewController extends MainViewController {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				loginManager.showMainView(sessionId, user);
+				loginManager.showMainView(user);
 			}
 		});
 		
@@ -229,7 +229,7 @@ public class DocumentsViewController extends MainViewController {
 				for (Node node : questionPane.getChildren()) {
 					if (node.getClass().getSimpleName().equals("Label")) {
 						Choix newChoix = new Choix();
-						newChoix.setLibelle(libelle);
+						//newChoix.setLibelle(libelle);
 					}
 					
 				}

@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -15,13 +17,18 @@
       <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-               	<Label layoutX="120.0" layoutY="40.0" prefHeight="18.0" prefWidth="267.0" text="Please, login to use LERS:" />
-          		<Label layoutX="120.0" layoutY="83.0" text="Username:" />
-          		<Label layoutX="120.0" layoutY="122.0" text="Password:" />
-          		<TextField fx:id="user" layoutX="209.0" layoutY="79.0" />
-          		<PasswordField fx:id="password" layoutX="209.0" layoutY="118.0" />
-            	<Button fx:id="loginButton" alignment="CENTER" defaultButton="true" layoutX="334.0" layoutY="211.0" mnemonicParsing="false" text="Login" />
-                <Hyperlink fx:id="hyperlink" layoutX="212.0" layoutY="160.0" text="Forgot your password?" />
+                  <ImageView fitHeight="380.0" fitWidth="254.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/LersLogo2.jpg" />
+                     </image>
+                  </ImageView>
+               	<Label layoutX="263.0" layoutY="75.0" prefHeight="18.0" prefWidth="267.0" text="Please, login to use LERS:" />
+          		<Label layoutX="263.0" layoutY="118.0" text="Username:" />
+          		<Label layoutX="263.0" layoutY="157.0" text="Password:" />
+          		<TextField fx:id="user" layoutX="352.0" layoutY="114.0" />
+          		<PasswordField fx:id="password" layoutX="352.0" layoutY="153.0" />
+            	<Button fx:id="loginButton" alignment="CENTER" defaultButton="true" layoutX="477.0" layoutY="246.0" mnemonicParsing="false" text="Login" />
+                <Hyperlink fx:id="hyperlink" layoutX="355.0" layoutY="195.0" text="Forgot your password?" />
                </children>
             </Pane>
       </children>

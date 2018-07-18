@@ -9,6 +9,7 @@ import application.LoginDemoApplication;
 import application.MainViewController;
 import application.login.LoginManager;
 import entity.AccesBDD;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -40,7 +42,9 @@ public class EmployeeViewController extends MainViewController {
 	private Scene scene;
 	
 	private Stage create;
-
+	
+	private Stage detail;
+	
 	private List<Personnel> employeeList = new ArrayList<>();
 	private List<Label> labelList = new ArrayList<>();
 	@FXML
@@ -58,15 +62,29 @@ public class EmployeeViewController extends MainViewController {
 	@FXML
 	private Button enregistrerBouton = new Button();
 	@FXML
+	private Button deleteButton = new Button();
+	@FXML
 	private AnchorPane listEmployee = new AnchorPane();
-	
-	public void initialize(LoginManager loginManager, RH user, String sessionId) {
-		super.initialize(loginManager, user, sessionId);
+	@FXML
+	private Pane paneDelete = new Pane();
+	@FXML
+	private Label name = new Label();
+	@FXML
+	private Label firstname = new Label();
+	@FXML
+	private Label emailLabel = new Label();
+	@FXML
+	private Label job = new Label();
+	@FXML
+	private VBox vboxDelete = new VBox();
+
+	public void initialize(LoginManager loginManager, RH user) {
+		super.initialize(loginManager, user);
 		home.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				loginManager.showMainView(sessionId, user);
+				loginManager.showMainView(user);
 			}
 		});
 		
@@ -74,7 +92,7 @@ public class EmployeeViewController extends MainViewController {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				showUserCreateView(loginManager, sessionId, user);
+				showUserCreateView(loginManager, user);
 			}
 		});
 		
@@ -89,19 +107,26 @@ public class EmployeeViewController extends MainViewController {
 		
 		VBox vbox1 = new VBox();
 		vbox1.setFillWidth(false);
-		vbox1.setAlignment(Pos.CENTER_LEFT);
 		vbox1.setPrefWidth(primaryScreenBounds.getWidth() / 2);
 		VBox vbox2 = new VBox();
 		vbox2.setFillWidth(false);
-		vbox2.setAlignment(Pos.CENTER_LEFT);
 		vbox2.setPrefWidth(primaryScreenBounds.getWidth() / 2);
 		HBox.setHgrow(vbox1, Priority.ALWAYS);
 		HBox.setHgrow(vbox2, Priority.ALWAYS);
 		for (int i = 0; i < labelList.size(); i++) {
-			
+			final int index = i;
 			ImageView imv = new ImageView();
 			Image image2 = new Image(LoginDemoApplication.class.getResourceAsStream("./images/personnel.png"));
 			imv.setImage(image2);
+			imv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					
+					showUserDetailsView(loginManager, user, employeeList.get(index));
+				}
+
+			});
+			
 			
 			HBox hbox = new HBox();
 			hbox.getChildren().add(imv);
@@ -120,12 +145,10 @@ public class EmployeeViewController extends MainViewController {
 		hbowTop.getChildren().add(vbox2);
 		listEmployee.getChildren().add(hbowTop);
 		((Stage) loginManager.getScene().getWindow()).setMaximized(true);
-		// listEmployee.getParent().prefWidth(primaryScreenBounds.getWidth() - 200);
-		// listEmployee.getParent().prefHeight(primaryScreenBounds.getHeight() - 200);
 	}
 	
-	public void initializeUser(LoginManager loginManager, RH user, String sessionId, Stage stage) throws NoSuchMethodException, SecurityException {
-		super.initialize(loginManager, user, sessionId);
+	public void initializeUser(LoginManager loginManager, RH user, Stage stage) {
+		super.initialize(loginManager, user);
 		
 		create = stage;
 		
@@ -134,10 +157,31 @@ public class EmployeeViewController extends MainViewController {
 			public void handle(MouseEvent event) {
 				ajouterUserDB();
 				create.close();
-				loginManager.showMainView(sessionId, user);
+				loginManager.showUserList(user);
 			}
 		});
 		
+	}
+	
+	public void initializeDeleteUser(LoginManager loginManager, RH user, Personnel personnel, Stage stage) {
+		super.initialize(loginManager, user);
+		
+		detail = stage;
+		
+		firstname.setText("FirstName: " + personnel.getPrenom());
+		name.setText("Name: " + personnel.getNom());
+		emailLabel.setText("email: " + personnel.getEmail());
+		job.setText("Job: " + personnel.getMetier());
+		
+		deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event2) {
+				deleteUserDB(personnel);
+				detail.close();
+				loginManager.showUserList(user);
+				
+			}
+		});
 	}
 	
 	private List<Personnel> getPersonnelListFromDB() {
@@ -151,7 +195,32 @@ public class EmployeeViewController extends MainViewController {
 		return null;
 	}
 	
-	public void showUserCreateView(LoginManager loginManager, String sessionId, RH user) {
+
+	private void showUserDetailsView(LoginManager loginManager, RH user, Personnel personnel) {
+		detail = new Stage();
+		detail.initModality(Modality.APPLICATION_MODAL);
+		detail.initOwner((Stage) loginManager.getScene().getWindow());
+		VBox dialogVbox = new VBox(20);
+		dialogVbox.setAlignment(Pos.CENTER_LEFT);
+		
+		dialogVbox.getChildren().add(paneDelete);
+		scene = new Scene(dialogVbox, 400, 600);
+		detail.setScene(scene);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("employeedelete.fxml"));
+		try {
+			scene.setRoot((Parent) loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		EmployeeViewController controller = loader.<EmployeeViewController>getController();
+		controller.initializeDeleteUser(loginManager, user, personnel, detail);
+		detail.centerOnScreen();
+		detail.show();
+
+	}
+		
+	
+	public void showUserCreateView(LoginManager loginManager, RH user) {
 		create = new Stage();
 		create.initModality(Modality.APPLICATION_MODAL);
 		create.initOwner((Stage) loginManager.getScene().getWindow());
@@ -166,11 +235,7 @@ public class EmployeeViewController extends MainViewController {
 			e.printStackTrace();
 		}
 		EmployeeViewController controller = loader.<EmployeeViewController>getController();
-		try {
-			controller.initializeUser(loginManager, user, sessionId, create);
-		} catch (NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-		}
+		controller.initializeUser(loginManager, user, create);
 		create.centerOnScreen();
 		create.show();
 	}
@@ -185,6 +250,13 @@ public class EmployeeViewController extends MainViewController {
 		
 		AccesBDD abdd = AccesBDD.getInstance();
 		abdd.insererObjet(newUser);
+	}
+	
+	private void deleteUserDB(Personnel personnel)  {
+		System.out.println("deleteUserDB");
+		
+		AccesBDD abdd = AccesBDD.getInstance();
+		abdd.supprimerObjet(personnel);
 	}
 	
 }
