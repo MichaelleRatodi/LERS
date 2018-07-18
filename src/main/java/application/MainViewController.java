@@ -54,7 +54,7 @@ public class MainViewController extends UserInfoController {
 		
 	}
 	
-	private void showDocumentsView(LoginManager loginManager, String sessionID, RH user) {
+	public void showDocumentsView(LoginManager loginManager, String sessionID, RH user) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("./documents/docsview.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());
@@ -65,7 +65,7 @@ public class MainViewController extends UserInfoController {
 		}
 	}
 	
-	private void showEmployeeView(LoginManager loginManager, String sessionID, RH user) {
+	public void showEmployeeView(LoginManager loginManager, String sessionID, RH user) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("./employee/employeeview.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());

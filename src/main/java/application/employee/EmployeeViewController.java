@@ -1,7 +1,7 @@
 package application.employee;
 
 import java.io.IOException;
-
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class EmployeeViewController extends MainViewController {
 	private Scene scene;
 	
 	private Stage create;
-	
+
 	private List<Personnel> employeeList = new ArrayList<>();
 	private List<Label> labelList = new ArrayList<>();
 	@FXML
@@ -124,7 +124,7 @@ public class EmployeeViewController extends MainViewController {
 		// listEmployee.getParent().prefHeight(primaryScreenBounds.getHeight() - 200);
 	}
 	
-	public void initializeUser(LoginManager loginManager, RH user, String sessionId, Stage stage) {
+	public void initializeUser(LoginManager loginManager, RH user, String sessionId, Stage stage) throws NoSuchMethodException, SecurityException {
 		super.initialize(loginManager, user, sessionId);
 		
 		create = stage;
@@ -166,7 +166,11 @@ public class EmployeeViewController extends MainViewController {
 			e.printStackTrace();
 		}
 		EmployeeViewController controller = loader.<EmployeeViewController>getController();
-		controller.initializeUser(loginManager, user, sessionId, create);
+		try {
+			controller.initializeUser(loginManager, user, sessionId, create);
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
 		create.centerOnScreen();
 		create.show();
 	}

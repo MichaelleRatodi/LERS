@@ -69,7 +69,9 @@ public class AccesBDD {
 		return true;
 	}
 	
-	public <T> void insererObjet(T objet) {
+	public <T> int insererObjet(T objet) {
+		
+		int newIndex = 0;
 		
 		try {
 			StringBuilder requete = new StringBuilder(
@@ -79,7 +81,7 @@ public class AccesBDD {
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(requete.toString());
 			rs.next();
-			int newIndex = rs.getInt(1) + 1;
+			newIndex = rs.getInt(1) + 1;
 			requete = new StringBuilder("insert into " + objet.getClass().getSimpleName() + " (");
 			Method method;
 			method = objet.getClass().getDeclaredMethod("getFields");
@@ -112,6 +114,8 @@ public class AccesBDD {
 				| InvocationTargetException | SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return newIndex;
 	}
 	
 	public <T> void supprimerObjet(T objet) {

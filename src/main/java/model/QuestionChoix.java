@@ -24,12 +24,12 @@ public class QuestionChoix extends Question {
 		super.setQuestion_id(question_id);
 	}
 	
-	public int getFormulaire_id() {
-		return super.getFormulaire_id();
+	public int getQuestionnaire_id() {
+		return super.getQuestionnaire_id();
 	}
 	
-	public void setFormulaire_id(int formulaire_id) {
-		super.setFormulaire_id(formulaire_id);
+	public void setQuestionnaire_id(int questionnaire_id) {
+		super.setQuestionnaire_id(questionnaire_id);
 	}
 	
 	public String getLibelle() {

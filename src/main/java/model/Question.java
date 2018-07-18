@@ -3,7 +3,7 @@ package model;
 public class Question {
 	
 	private int question_id;
-	private int formulaire_id;
+	private int questionnaire_id;
 	private String libelle;
 	
 	public static String getSchema() {
@@ -23,7 +23,7 @@ public class Question {
 	}
 	
 	public static String[] getFields() {
-		return new String[] { "question_id", "formulaire_id", "libelle" };
+		return new String[] { "question_id", "questionnaire_id", "libelle" };
 	}
 	
 	public int getQuestion_id() {
@@ -34,12 +34,12 @@ public class Question {
 		this.question_id = question_id;
 	}
 	
-	public int getFormulaire_id() {
-		return formulaire_id;
+	public int getQuestionnaire_id() {
+		return questionnaire_id;
 	}
 	
-	public void setFormulaire_id(int formulaire_id) {
-		this.formulaire_id = formulaire_id;
+	public void setQuestionnaire_id(int questionnaire_id) {
+		this.questionnaire_id = questionnaire_id;
 	}
 	
 	public String getLibelle() {
