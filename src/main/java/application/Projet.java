@@ -23,7 +23,7 @@ public class Projet extends Application {
 			primaryStage.show();
 			AccesBDD abdd = AccesBDD.getInstance();
 //			abdd.createBDD();
-			abdd.remplirBDD();
+//			abdd.remplirBDD();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
