@@ -123,7 +123,6 @@ public class DocumentsViewController extends MainViewController {
 				newLabel.setId("" + index);
 				newLabel.setLayoutX(200 + 100 * index);
 				questionPane.getChildren().add(newLabel);
-				System.out.println("event.getSource().getClass()" + event.getSource().getClass());
 				listeMultipleChoices.get(0).add(newLabel);
 			}
 		});
@@ -164,7 +163,7 @@ public class DocumentsViewController extends MainViewController {
 				addChoice.setText("Add Choice");
 				addChoice.setLayoutX(41);
 				addChoice.setLayoutY(125);
-				System.out.println("nbQuestions" + nbQuestions);
+				
 				addChoices.add(addChoice);
 				addChoices.get(nbQuestions - 1).addEventHandler(MouseEvent.MOUSE_CLICKED,
 						new EventHandler<MouseEvent>() {
@@ -181,7 +180,6 @@ public class DocumentsViewController extends MainViewController {
 								newLabel.setId("" + index);
 								newLabel.setLayoutX(200 + 100 * index);
 								newAP.getChildren().add(newLabel);
-								System.out.println("event.getSource().getClass()" + event.getSource().getClass());
 								listeMultipleChoices.get(nbQuestions - 1).add(newLabel);
 							}
 						});
@@ -257,7 +255,7 @@ public class DocumentsViewController extends MainViewController {
 				
 				for (Label strChoix : listeMultipleChoices.get(i)) {
 					Choix newChoix = new Choix();
-					newChoix.setChoix_id(newQuestId);System.out.println("newQuestId "+newQuestId);
+					newChoix.setChoix_id(newQuestId);
 					newChoix.setLibelle(strChoix.getText());
 					abdd.insererObjet(newChoix);
 				}

@@ -8,11 +8,11 @@ public class QuestionnairePersonnel {
 	public static String getSchema() {
 		return "create table QuestionnairePersonnel (\r\n"
 				+ "questionnaire_id int not null references Questionnaire(questionnaire_id),\r\n"
-				+ "personnel_id int not null references Personne(personnel_id))";
+				+ "personnel_id int not null references Personnel(personnel_id))";
 	}
 	
 	public static String getConstraints() {
-		return " \"questionnairepersonnel_personne_id_fkey\" FOREIGN KEY (personne_id) REFERENCES personne(personne_id)\r\n"
+		return " \"questionnairepersonnel_personnel_id_fkey\" FOREIGN KEY (personnel_id) REFERENCES personnel(personnel_id)\r\n"
 				+ "    \"questionnairepersonnel_questionnaire_id_fkey\" FOREIGN KEY (questionnaire_id) REFERENCES questionnaire\r\n"
 				+ "(questionnaire_id)";
 	}
