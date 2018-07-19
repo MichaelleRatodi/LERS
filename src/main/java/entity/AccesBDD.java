@@ -57,6 +57,7 @@ public class AccesBDD {
 		this.createBDD();
 		this.initConnection();
 		this.createTables();
+		this.remplirBDD();
 	}
 	
 	private boolean initConnection() {
@@ -369,7 +370,8 @@ public class AccesBDD {
 						+ "(2, 'Ratodiarivony', 'Michaëlle', 'michaelle.ratodi@gmail.com', 'RH', 'michaelle', 'michaelle'),\r\n"
 						+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu')");
 			
-				st.executeUpdate("insert into Personnel values \r\n" + "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
+				st.executeUpdate("insert into Personnel values \r\n" 
+					+ "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
 					+ "(5, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
 					+ "(6, 'Lucas','HERNANDEZ', 'lucas.tata@gmail.com', 'employee1'),\r\n"
 					+ "(7, 'Steve' ,'MANDANDA', 'steve.tata@gmail.com', 'employee2'),\r\n"
@@ -384,11 +386,11 @@ public class AccesBDD {
 					+"(1,'Employees Opinions','2018-07-18', '2018-07-30', 7)");
 			
 				st.executeUpdate("insert into QuestionChoix values\r\n"
-					+"(1,1,'What do you think about the management of the enterprise ?',false),\r\n"
-					+"(3,1,'What do you think about the operation of the enterprise ?',false),\r\n"
-					+"(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',false),\r\n"
-					+"(7,1,'What do you think about your workspace ?',false),\r\n"
-					+"(9,1,'Are you satisfied with the available tools ?',false)");
+					+"(1,1,'What do you think about the management of the enterprise ?',1,false),\r\n"
+					+"(3,1,'What do you think about the operation of the enterprise ?',3,false),\r\n"
+					+"(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',5,false),\r\n"
+					+"(7,1,'What do you think about your workspace ?',7,false),\r\n"
+					+"(9,1,'Are you satisfied with the available tools ?',9,false)");
 					
 				st.executeUpdate("insert into QuestionTexte values\r\n"
 					+"(2,1,'Explain your answer about the management',80,4),\r\n"
@@ -400,20 +402,6 @@ public class AccesBDD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		try (Statement st = connection.createStatement()) {
-			ResultSet rs = st.executeQuery("SELECT * FROM question");
-			
-			while (rs.next()) {
-				System.out.println("t");
-				System.out.println(rs.getInt("question_id"));
-			}
-			
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 		
 		try (Statement st = connection.createStatement()) {
 

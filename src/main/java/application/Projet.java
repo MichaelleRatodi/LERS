@@ -16,14 +16,14 @@ public class Projet extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//BorderPane root = new BorderPane();
-			Parent root = FXMLLoader.load(getClass().getResource("sending/SendingPage.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("questionnaire/Questionnaire.fxml"));
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			AccesBDD abdd = AccesBDD.getInstance();
 //			abdd.createBDD();
-			abdd.remplirBDD();
+//			abdd.remplirBDD();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
