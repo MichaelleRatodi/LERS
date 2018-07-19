@@ -366,29 +366,29 @@ public class AccesBDD {
 						+ "(1, 'Bréhu', 'Soraya', 'soraya.brehu@gmail.com', 'RH', 'linda', '1234'),\r\n"
 						+ "(2, 'Ratodiarivony', 'Michaëlle', 'michaelle.ratodi@gmail.com', 'RH', 'michaelle', 'michaelle'),\r\n"
 						+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu')");
-				
-				st.executeUpdate(
-						"insert into Personnel values \r\n" + "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
-								+ "(5, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
-								+ "(6, 'Lucas','HERNANDEZ', 'lucas.tata@gmail.com', 'employee1'),\r\n"
-								+ "(7, 'Steve' ,'MANDANDA', 'steve.tata@gmail.com', 'employee2'),\r\n"
-								+ "(8, 'Benjamin','MENDY', 'b2@gmail.com', 'employee3'),\r\n"
-								+ "(9, 'Samuel','UMTITI', 's1.tata@gmail.com', 'employee4'),\r\n"
-								+ "(10, 'Adil','RAMI', 'a.r@gmail.com', 'employee5'),\r\n"
-								+ "(11, 'Olivier','GIROUD', 'o.g.tata@gmail.com', 'employee6'),\r\n"
-								+ "(12, 'Nabil','FEKIR', 'n.f@gmail.com', 'employee7'),\r\n"
-								+ "(13, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
-				
+
+				st.executeUpdate("insert into Personnel values \r\n" 
+					+ "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
+					+ "(5, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
+					+ "(6, 'Lucas','HERNANDEZ', 'lucas.tata@gmail.com', 'employee1'),\r\n"
+					+ "(7, 'Steve' ,'MANDANDA', 'steve.tata@gmail.com', 'employee2'),\r\n"
+					+ "(8, 'Benjamin','MENDY', 'b2@gmail.com', 'employee3'),\r\n"
+					+ "(9, 'Samuel','UMTITI', 's1.tata@gmail.com', 'employee4'),\r\n"
+					+ "(10, 'Adil','RAMI', 'a.r@gmail.com', 'employee5'),\r\n"
+					+ "(11, 'Olivier','GIROUD', 'o.g.tata@gmail.com', 'employee6'),\r\n"
+					+ "(12, 'Nabil','FEKIR', 'n.f@gmail.com', 'employee7'),\r\n"
+					+ "(13, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
+			
 				st.executeUpdate("insert into Questionnaire values\r\n"
 						+ "(1,'Employees Opinions','2018-07-18', '2018-07-30', 7)");
 				
 				st.executeUpdate("insert into QuestionChoix values\r\n"
-						+ "(1,1,'What do you think about the management of the enterprise ?',1,false),\r\n"
-						+ "(3,1,'What do you think about the operation of the enterprise ?',3,false),\r\n"
-						+ "(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',5,false),\r\n"
-						+ "(7,1,'What do you think about your workspace ?',7,false),\r\n"
-						+ "(9,1,'Are you satisfied with the available tools ?',9,false)");
-				
+					+"(1,1,'What do you think about the management of the enterprise ?',1,false),\r\n"
+					+"(3,1,'What do you think about the operation of the enterprise ?',3,false),\r\n"
+					+"(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',5,false),\r\n"
+					+"(7,1,'What do you think about your workspace ?',7,false),\r\n"
+					+"(9,1,'Are you satisfied with the available tools ?',9,false)");
+					
 				st.executeUpdate("insert into QuestionTexte values\r\n"
 						+ "(2,1,'Explain your answer about the management',80,4),\r\n"
 						+ "(4,1,'Explain your answer about the operation',80,4),\r\n"
@@ -401,13 +401,23 @@ public class AccesBDD {
 		}
 		
 		try (Statement st = connection.createStatement()) {
-			
-			st.executeUpdate("insert into Choix values\r\n" + "(1,'Very satisfied'),\r\n"
-					+ "(1,'Moderately satisfied'),\r\n" + "(1,'Unsatisfied'),\r\n" + "(3,'Very satisfied'),\r\n"
-					+ "(3,'Moderately satisfied'),\r\n" + "(3,'Unsatisfied'),\r\n" + "(5,'Very satisfied'),\r\n"
-					+ "(5,'Moderately satisfied'),\r\n" + "(5,'Unsatisfied'),\r\n" + "(7,'Very satisfied'),\r\n"
-					+ "(7,'Moderately satisfied'),\r\n" + "(7,'Unsatisfied'),\r\n" + "(9,'Yes'),\r\n" + "(9,'No')");
-			
+
+			st.executeUpdate("insert into Choix values\r\n"
+				+"(1,'Very satisfied'),\r\n"
+				+"(1,'Moderately satisfied'),\r\n"
+				+"(1,'Unsatisfied'),\r\n"
+				+"(3,'Very satisfied'),\r\n"
+				+"(3,'Moderately satisfied'),\r\n"
+				+"(3,'Unsatisfied'),\r\n"
+				+"(5,'Very satisfied'),\r\n"
+				+"(5,'Moderately satisfied'),\r\n"
+				+"(5,'Unsatisfied'),\r\n"
+				+"(7,'Very satisfied'),\r\n"
+				+"(7,'Moderately satisfied'),\r\n"
+				+"(7,'Unsatisfied'),\r\n"
+				+"(9,'Yes'),\r\n"
+				+"(9,'No')");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
