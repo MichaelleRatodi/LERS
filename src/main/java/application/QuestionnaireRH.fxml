@@ -45,9 +45,9 @@
       <RadioButton layoutX="20.0" layoutY="573.0" mnemonicParsing="false" text="Yes" />
       <RadioButton layoutX="101.0" layoutY="572.0" mnemonicParsing="false" text="No" />
       <TextArea layoutX="20.0" layoutY="86.0" prefHeight="38.0" prefWidth="673.0" text="Question 1 : What do you think about the operation of the enterprise?" />
-      <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="668.0" layoutY="14.0">
+      <ImageView fitHeight="76.0" fitWidth="79.0" layoutX="638.0">
          <image>
-            <Image url="@images/personnel.png" />
+            <Image url="@images/logo-msn-messenger-mac.png" />
          </image>
       </ImageView>
    </children>
