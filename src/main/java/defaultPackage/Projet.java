@@ -12,6 +12,7 @@ public class Projet {
 		System.out.println("Classe d'exécution du projet");
 		
 		AccesBDD abdd = AccesBDD.getInstance();
+		abdd.createBDD();
 		/*
 		 * Questionnaire quest = new Questionnaire(1, "Essai1", LocalDate.now(),
 		 * LocalDate.now().plusDays(2), 2); abdd.insererObjet(quest); quest = new
@@ -31,9 +32,9 @@ public class Projet {
 		 * System.out.println(quests.get(0).getDateCreation());
 		 * System.out.println(quests.get(1).getDateCreation());
 		 */
-		Questionnaire quest = abdd.recupererObjetParId(new Questionnaire(), 1);
+		/*Questionnaire quest = abdd.recupererObjetParId(new Questionnaire(), 1);
 		quest.setIntervalleRelance(5);
-		abdd.majObjet(quest);
+		abdd.majObjet(quest);*/
 	}
 	
 }

@@ -1,11 +1,13 @@
 package model;
 
 public class QuestionChoix extends Question {
+
+	private int choix_id;
 	
 	private boolean plusieursChoix;
 	
 	public static String getSchema() {
-		return "create table QuestionChoix (PlusieursChoix boolean not null) inherits(Question)";
+		return "create table QuestionChoix (choix_id int unique not null, PlusieursChoix boolean not null) inherits(Question)";
 	}
 	
 	public static String getConstraints() {
@@ -13,7 +15,15 @@ public class QuestionChoix extends Question {
 	}
 	
 	public static String[] getFields() {
-		return new String[] { "question_id", "formulaire_id", "libelle", "plusieursChoix" };
+		return new String[] { "question_id", "questionnaire_id", "libelle", "choix_id", "plusieursChoix" };
+	}
+
+	public int getChoix_id() {
+		return choix_id;
+	}
+	
+	public void setChoix_id(int choix_id) {
+		this.choix_id = choix_id;
 	}
 	
 	public int getQuestion_id() {

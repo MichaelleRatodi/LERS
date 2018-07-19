@@ -49,7 +49,7 @@ public class AccesBDD {
 	
 	private boolean initConnection() {
 		
-		//createBDD();
+		// createBDD();
 		
 		// Connexion database postgreSQL
 		String url = "jdbc:postgresql://localhost/projet";
@@ -74,14 +74,30 @@ public class AccesBDD {
 		int newIndex = 0;
 		
 		try {
-			StringBuilder requete = new StringBuilder(
-					"select count(*) from " + objet.getClass().getSimpleName().toLowerCase());
-			
+			StringBuilder requete = new StringBuilder();
 			Statement st;
-			st = connection.createStatement();
-			ResultSet rs = st.executeQuery(requete.toString());
-			rs.next();
-			newIndex = rs.getInt(1) + 1;
+			
+			if (!(objet.getClass().getSimpleName().equals("Choix")
+					|| objet.getClass().getSimpleName().equals("ListePersonnel")
+					|| objet.getClass().getSimpleName().equals("QuestionnairePersonnel")
+					|| objet.getClass().getSimpleName().equals("Reponse"))) {
+				
+				if (objet.getClass().getSimpleName().equals("QuestionTexte")
+						|| objet.getClass().getSimpleName().equals("QuestionChoix"))
+					requete.append("select max(question_id) from Question");
+				else if (objet.getClass().getSimpleName().equals("RH"))
+					requete.append("select max(personnel_id) from Personnel");
+				else
+					requete.append("select max(" + objet.getClass().getSimpleName().toLowerCase() + "_id) from "
+							+ objet.getClass().getSimpleName().toLowerCase());
+				
+				st = connection.createStatement();
+				ResultSet rs = st.executeQuery(requete.toString());
+				rs.next();
+				newIndex = rs.getInt(1) + 1;
+				System.out.println("class " + objet.getClass().getSimpleName());
+				System.out.println("newIndex " + newIndex);
+			}
 			requete = new StringBuilder("insert into " + objet.getClass().getSimpleName() + " (");
 			Method method;
 			method = objet.getClass().getDeclaredMethod("getFields");
@@ -92,15 +108,20 @@ public class AccesBDD {
 			requete.deleteCharAt(requete.length() - 1);
 			requete.append(") values (");
 			
+			int indexInsert = newIndex;
+			int choix_id = 0;
 			for (String argument : arguments) {
 				
 				method = objet.getClass()
 						.getDeclaredMethod("get" + Character.toUpperCase(argument.charAt(0)) + argument.substring(1));
 				
-				if ((method.invoke(objet) instanceof Integer) && (argument.substring(0, argument.length() - 3))
-						.equals(objet.getClass().getSimpleName().toLowerCase())) {
-					requete.append(newIndex + ",");
-				} else
+				if (indexInsert > 0) {
+					requete.append(indexInsert + ",");
+					choix_id = indexInsert;
+					indexInsert = 0;
+				} else if (objet.getClass().getSimpleName().equals("QuestionChoix") && argument.equals("choix_id"))
+					requete.append("'" + choix_id + "',");
+				else
 					requete.append("'" + method.invoke(objet) + "',");
 			}
 			
@@ -320,11 +341,11 @@ public class AccesBDD {
 			
 			st.execute(Question.getSchema());
 			
-			st.execute(Choix.getSchema());
-			
 			st.execute(QuestionChoix.getSchema());
 			
 			st.execute(QuestionTexte.getSchema());
+			
+			st.execute(Choix.getSchema());
 			
 			st.execute(Reponse.getSchema());
 			

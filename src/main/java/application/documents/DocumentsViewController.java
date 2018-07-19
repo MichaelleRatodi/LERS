@@ -46,7 +46,13 @@ public class DocumentsViewController extends MainViewController {
 	@FXML
 	private Button addChoice = new Button();
 	@FXML
+	private RadioButton freeChoice = new RadioButton();
+	@FXML
+	private List<Button> addChoices = new ArrayList<Button>();
+	@FXML
 	private TextField addLabelChoice = new TextField();
+	
+	private List<TextField> addLabelChoices = new ArrayList<TextField>();
 	@FXML
 	private TextField questionLabel = new TextField();
 	@FXML
@@ -55,6 +61,8 @@ public class DocumentsViewController extends MainViewController {
 	private AnchorPane questionPane = new AnchorPane();
 	
 	private List<TextField> listeLabels = new ArrayList<TextField>();
+	
+	private List<ArrayList<Label>> listeMultipleChoices = new ArrayList<ArrayList<Label>>();
 	
 	private List<RadioButton> listeMultipleChoice = new ArrayList<RadioButton>();
 	
@@ -66,10 +74,9 @@ public class DocumentsViewController extends MainViewController {
 	
 	private int nbQuestions;
 	
-	public void initialize(LoginManager loginManager, RH user, String sessionId) {
+	public void initialize(LoginManager loginManager, RH user) {
 		super.initialize(loginManager, user);
 		questionnaire = new Questionnaire();
-		// question = new Question();
 		
 		home.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
@@ -97,11 +104,36 @@ public class DocumentsViewController extends MainViewController {
 		nbQuestions = 1;
 		
 		listeLabels.add(questionLabel);
+		listeMultipleChoices.add(new ArrayList<Label>());
+		listeFreeChoice.add(freeChoice);
+		addLabelChoices.add(addLabelChoice);
+		
+		addChoices.add(addChoice);
+		addChoices.get(0).addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				
+				Label newLabel = new Label();
+				newLabel.setText(addLabelChoice.getText());
+				newLabel.setLayoutY(92);
+				
+				int index = 1;
+				for (Label choice : listeMultipleChoices.get(0))
+					index++;
+				newLabel.setId("" + index);
+				newLabel.setLayoutX(200 + 100 * index);
+				questionPane.getChildren().add(newLabel);
+				System.out.println("event.getSource().getClass()" + event.getSource().getClass());
+				listeMultipleChoices.get(0).add(newLabel);
+			}
+		});
 		
 		addQuestion.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				nbQuestions++;
+				
+				listeMultipleChoices.add(new ArrayList<Label>());
 				
 				TitledPane newQuestion = new TitledPane();
 				newQuestion.setText("Question " + nbQuestions);
@@ -122,13 +154,37 @@ public class DocumentsViewController extends MainViewController {
 				newRadioMultipleChoice.setToggleGroup(tg);
 				newRadioMultipleChoice.setSelected(true);
 				TextField newLabelChoice = new TextField();
-				newLabelChoice.setText("Choice answer example");
+				newLabelChoice.setPromptText("Choice answer example");
 				newLabelChoice.setLayoutX(41);
 				newLabelChoice.setLayoutY(88);
+				newLabelChoice.setPrefHeight(26);
+				newLabelChoice.setPrefWidth(200);
+				addLabelChoices.add(newLabelChoice);
 				Button addChoice = new Button();
 				addChoice.setText("Add Choice");
 				addChoice.setLayoutX(41);
 				addChoice.setLayoutY(125);
+				System.out.println("nbQuestions" + nbQuestions);
+				addChoices.add(addChoice);
+				addChoices.get(nbQuestions - 1).addEventHandler(MouseEvent.MOUSE_CLICKED,
+						new EventHandler<MouseEvent>() {
+							@Override
+							public void handle(MouseEvent event) {
+								
+								Label newLabel = new Label();
+								newLabel.setText(addLabelChoices.get(nbQuestions - 1).getText());
+								newLabel.setLayoutY(92);
+								
+								int index = 1;
+								for (Label choice : listeMultipleChoices.get(nbQuestions - 1))
+									index++;
+								newLabel.setId("" + index);
+								newLabel.setLayoutX(200 + 100 * index);
+								newAP.getChildren().add(newLabel);
+								System.out.println("event.getSource().getClass()" + event.getSource().getClass());
+								listeMultipleChoices.get(nbQuestions - 1).add(newLabel);
+							}
+						});
 				RadioButton newRadioFreeChoice = new RadioButton();
 				newRadioFreeChoice.setText("Free answer Question");
 				newRadioFreeChoice.setLayoutX(23);
@@ -158,25 +214,6 @@ public class DocumentsViewController extends MainViewController {
 			}
 		});
 		
-		addChoice.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				Label newLabel = new Label();
-				newLabel.setText(addLabelChoice.getText());
-				newLabel.setLayoutY(92);
-				
-				int index = 1;
-				for (Node node : questionPane.getChildren()) {
-					if (node.getClass().getSimpleName().equals("Label"))
-						index++;
-				}
-				newLabel.setId("" + index);
-				newLabel.setLayoutX(41 + 100 * index);
-				questionPane.getChildren().add(newLabel);
-			}
-		});
-		
 	}
 	
 	private void showAlertMessage() {
@@ -198,43 +235,32 @@ public class DocumentsViewController extends MainViewController {
 	private void saveQuestions(int idForm) {
 		AccesBDD abdd = AccesBDD.getInstance();
 		
-		for (TextField tf : listeLabels) {
-			
-			Question newQuest = new Question();
-			newQuest.setLibelle(tf.getText());
-			newQuest.setQuestionnaire_id(idForm);
-			abdd.insererObjet(newQuest);
-		}
-		
 		for (int i = 0; i < listeLabels.size(); i++) {
-			// for(TextField tf : listeLabels) {
-			/*
-			 * Question newQuest = new Question();
-			 * newQuest.setLibelle(listeLabels.get(i).getText());
-			 * newQuest.setQuestionnaire_id(idForm);
-			 */
+			
 			if (listeFreeChoice.get(i).isSelected()) {
-				QuestionTexte newQuest = new QuestionTexte();
-				newQuest.setLibelle(listeLabels.get(i).getText());
-				newQuest.setQuestionnaire_id(idForm);
-				newQuest.setNbColonnesZoneTexte(5);
-				newQuest.setNbLignesZoneTexte(5);
-				abdd.insererObjet(newQuest);
+				QuestionTexte newQuestT = new QuestionTexte();
+				newQuestT.setLibelle(listeLabels.get(i).getText());
+				newQuestT.setQuestionnaire_id(idForm);
+				newQuestT.setNbColonnesZoneTexte(5);
+				newQuestT.setNbLignesZoneTexte(5);
+				abdd.insererObjet(newQuestT);
 			} else {
-				QuestionChoix newQuest = new QuestionChoix();
-				newQuest.setLibelle(listeLabels.get(i).getText());
-				newQuest.setQuestionnaire_id(idForm);
-				newQuest.setPlusieursChoix(false);
-				List<Choix> listeChoix = new ArrayList<Choix>();
-				for (Node node : questionPane.getChildren()) {
-					if (node.getClass().getSimpleName().equals("Label")) {
-						Choix newChoix = new Choix();
-						//newChoix.setLibelle(libelle);
-					}
-					
+				QuestionChoix newQuestC = new QuestionChoix();
+				newQuestC.setLibelle(listeLabels.get(i).getText());
+				newQuestC.setQuestionnaire_id(idForm);
+				if (listeMultipleChoices.get(i).size() > 1)
+					newQuestC.setPlusieursChoix(true);
+				else
+					newQuestC.setPlusieursChoix(false);
+				
+				int newQuestId = abdd.insererObjet(newQuestC);
+				
+				for (Label strChoix : listeMultipleChoices.get(i)) {
+					Choix newChoix = new Choix();
+					newChoix.setChoix_id(newQuestId);System.out.println("newQuestId "+newQuestId);
+					newChoix.setLibelle(strChoix.getText());
+					abdd.insererObjet(newChoix);
 				}
-				// Choix newChoix = new Choix();
-				// newChoix
 			}
 		}
 	}

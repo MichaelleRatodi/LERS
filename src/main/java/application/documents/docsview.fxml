@@ -91,7 +91,7 @@
                                           <ToggleGroup fx:id="choicetype" />
                                        </toggleGroup>
                                      </RadioButton>
-                                    <TextField fx:id="addLabelChoice" layoutX="41.0" layoutY="88.0" prefHeight="26.0" prefWidth="50.0" promptText="Choice answer example" text="" />
+                                    <TextField fx:id="addLabelChoice" layoutX="41.0" layoutY="88.0" prefHeight="26.0" prefWidth="200.0" promptText="Choice answer example" text="" />
                                     <Button fx:id="addChoice" layoutX="41.0" layoutY="125.0" mnemonicParsing="false" text="Add choice" />
                                     <RadioButton fx:id="freeChoice" layoutX="23.0" layoutY="162.0" mnemonicParsing="false" text="Free answer question" toggleGroup="$choicetype" />
                                   	<TextArea layoutX="23.0" layoutY="198.0" prefHeight="100.0" prefWidth="500.0" promptText="text reponse example" />

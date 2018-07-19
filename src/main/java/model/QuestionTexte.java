@@ -15,7 +15,7 @@ public class QuestionTexte extends Question {
 	}
 	
 	public static String[] getFields() {
-		return new String[] { "question_id", "formulaire_id", "libelle", "nbColonnesZoneTexte", "nbLignesZoneTexte" };
+		return new String[] { "question_id", "questionnaire_id", "libelle", "nbColonnesZoneTexte", "nbLignesZoneTexte" };
 	}
 	
 	public int getQuestion_id() {

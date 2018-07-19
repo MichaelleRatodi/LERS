@@ -2,28 +2,28 @@ package model;
 
 public class Choix {
 	
-	private int question_id;
+	private int choix_id;
 	private String libelle;
 	
 	public static String getSchema() {
-		return "create table Choix (\r\n" + "question_id int not null references Question(question_id),\r\n"
+		return "create table Choix (\r\n" + "choix_id int not null references QuestionChoix(choix_id),\r\n"
 				+ "Libelle varchar(255) not null)";
 	}
 	
 	public static String getConstraints() {
-		return "\"choix_question_id_fkey\" FOREIGN KEY (question_id) REFERENCES question(question_id)";
+		return "\"choix_choix_id_fkey\" FOREIGN KEY (choix_id) REFERENCES questionchoix(choix_id)";
 	}
 	
 	public static String[] getFields() {
-		return new String[] { "question_id", "libelle" };
+		return new String[] { "choix_id", "libelle" };
 	}
 	
-	public int getQuestion_id() {
-		return question_id;
+	public int getChoix_id() {
+		return choix_id;
 	}
 	
-	public void setQuestion_id(int question_id) {
-		this.question_id = question_id;
+	public void setChoix_id(int choix_id) {
+		this.choix_id = choix_id;
 	}
 	
 	public String getLibelle() {
