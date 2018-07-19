@@ -16,12 +16,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 import model.Questionnaire;
 import java.lang.String;
 
 public class SendingViewController implements Initializable {
-
+	@FXML
+	private Pane pane = new Pane();
+	
 	@FXML
 	ObservableList<String> comboCollection ;
 	

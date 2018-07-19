@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.questionnaire.QuestionnaireViewController">
+   <children>
+      <CheckBox fx:id="choix1c" layoutX="402.0" layoutY="114.0" mnemonicParsing="false" text="Unsatisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="choix1b" layoutX="204.0" layoutY="115.0" mnemonicParsing="false" text="Moderately Satisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choix1a" layoutX="45.0" layoutY="114.0" mnemonicParsing="false" text="Very Satisfied" />
+      <TextArea fx:id="question8" layoutX="21.0" layoutY="652.0" prefHeight="38.0" prefWidth="673.0" text="Question 8 : If not, why ?" />
+      <CheckBox fx:id="choix3c" layoutX="409.0" layoutY="298.0" mnemonicParsing="false" text="Unsatisfied" textAlignment="CENTER" />
+      <CheckBox fx:id="choix3b" layoutX="211.0" layoutY="299.0" mnemonicParsing="false" text="Moderately Satisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choix3a" layoutX="52.0" layoutY="298.0" mnemonicParsing="false" text="Very Satisfied" />
+      <TextArea fx:id="question3" layoutX="21.0" layoutY="246.0" prefHeight="38.0" prefWidth="673.0" text="Question 3 : What do you think about the operation of the enterprise?" />
+      <CheckBox fx:id="choix5c" layoutX="380.0" layoutY="472.0" mnemonicParsing="false" text="Unsatisfied" textAlignment="CENTER" />
+      <CheckBox fx:id="choix5b" layoutX="182.0" layoutY="473.0" mnemonicParsing="false" text="Moderately Satisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choix5a" layoutX="23.0" layoutY="472.0" mnemonicParsing="false" text="Very Satisfied" />
+      <TextArea fx:id="question5" layoutX="20.0" layoutY="426.0" prefHeight="38.0" prefWidth="673.0" text="Question 5 : What do you think about your workspace ?" />
+      <TextArea fx:id="question2" layoutX="21.0" layoutY="141.0" prefHeight="38.0" prefWidth="673.0" text="Question 2 : Explain your answer about the management " />
+      <TextArea fx:id="reponse2" layoutX="23.0" layoutY="183.0" prefHeight="49.0" prefWidth="673.0" />
+      <TextArea fx:id="question4" layoutX="20.0" layoutY="327.0" prefHeight="38.0" prefWidth="673.0" text="Question 4 : Explain your answer about the operation" />
+      <TextArea fx:id="reponse4" layoutX="20.0" layoutY="369.0" prefHeight="49.0" prefWidth="673.0" />
+      <TextArea fx:id="nom" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="322.0" text="Name : " />
+      <TextArea fx:id="prenom" layoutX="364.0" layoutY="14.0" prefHeight="38.0" prefWidth="322.0" text="Firstname : " />
+      <TextArea fx:id="question7" layoutX="23.0" layoutY="587.0" prefHeight="38.0" prefWidth="673.0" text="Question 7 : Are you satisfied with the available tools?" />
+      <RadioButton fx:id="choix7a" layoutX="20.0" layoutY="630.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton fx:id="choix7b" layoutX="101.0" layoutY="629.0" mnemonicParsing="false" text="No" />
+      <TextArea fx:id="question1" layoutX="20.0" layoutY="73.0" prefHeight="38.0" prefWidth="673.0" text="Question 1 : What do you think about the operation of the enterprise?" />
+      <Button fx:id="envoyer" layoutX="609.0" layoutY="738.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Send" />
+      <TextArea fx:id="reponse8" layoutX="21.0" layoutY="693.0" prefHeight="38.0" prefWidth="673.0" />
+      <TextArea fx:id="question6" layoutX="20.0" layoutY="493.0" prefHeight="38.0" prefWidth="673.0" text="Question 6 : Explain your answer about the operation" />
+      <TextArea fx:id="reponse6" layoutX="20.0" layoutY="535.0" prefHeight="49.0" prefWidth="673.0" />
+   </children>
+</Pane>

@@ -29,7 +29,7 @@ public class AccesBDD {
 	
 	/** Constructeur privé */
 	private AccesBDD() {
-		initConnection();
+		initDatabase();
 	}
 	
 	/** Instance unique pré-initialisée */
@@ -43,14 +43,23 @@ public class AccesBDD {
 	private Connection connection;
 	
 	public Connection getConnection() {
-		
 		return connection;
 	}
 	
+	@Override
+	protected void finalize() throws Throwable {
+		super.finalize();
+		
+		connection.close();
+	}
+	
+	private void initDatabase() {
+		this.createBDD();
+		this.initConnection();
+		this.createTables();
+	}
+	
 	private boolean initConnection() {
-		
-		createBDD();
-		
 		// Connexion database postgreSQL
 		String url = "jdbc:postgresql://localhost/projet";
 		Properties props = new Properties();
@@ -241,34 +250,30 @@ public class AccesBDD {
 		return retour;
 	}
 	
-	private void createBDD() {
-		try {
-			
-			// Connexion database postgreSQL
-			String url = "jdbc:postgresql://localhost/";
-			Properties props = new Properties();
-			props.setProperty("user", "postgres");
-			props.setProperty("password", "postgres");
-			
-			// Create the connection to our database.
-			connection = DriverManager.getConnection(url, props);
-			
-			Statement st = connection.createStatement();
-			
+	public void createBDD() {
+		// Connexion database postgreSQL
+		String url = "jdbc:postgresql://localhost/";
+		Properties props = new Properties();
+		props.setProperty("user", "postgres");
+		props.setProperty("password", "postgres");
+		
+		try (
+				// Create the connection to our database.
+				Connection connection = DriverManager.getConnection(url, props);
+				// Create statement.
+				Statement st = connection.createStatement()) {
 			st.execute("drop database if exists projet");
 			
 			st.execute("create database projet");
 			
-			st.close();
-			
-			connection.close();
-			
 			url = "jdbc:postgresql://localhost/projet";
-			
-			connection = DriverManager.getConnection(url, props);
-			
-			st = connection.createStatement();
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createTables() {
+		try (Statement st = connection.createStatement()) {
 			st.execute(Questionnaire.getSchema());
 			
 			st.execute(Liste.getSchema());
@@ -288,13 +293,22 @@ public class AccesBDD {
 			st.execute(Reponse.getSchema());
 			
 			st.execute(RH.getSchema());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void remplirBDD() {
+		try (Statement st = connection.createStatement()) {
+			ResultSet result= st.executeQuery("select count(*) AS nb from RH");
+			result.next();
+			if (result.getInt("nb") == 0) {
+				st.executeUpdate("insert into RH values\r\n"
+						+ "(1, 'Bréhu', 'Soraya', 'soraya.brehu@gmail.com', 'RH', 'linda', '1234'),\r\n"
+						+ "(2, 'Ratodiarivony', 'Michaëlle', 'michaelle.ratodi@gmail.com', 'RH', 'michaelle', 'michaelle'),\r\n"
+						+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu')");
 			
-			st.execute("insert into RH values\r\n"
-					+ "(1, 'Bréhu', 'Soraya', 'soraya.brehu@gmail.com', 'RH', 'linda', '1234'),\r\n"
-					+ "(2, 'Ratodiarivony', 'Michaëlle', 'michaelle.ratodi@gmail.com', 'RH', 'michaelle', 'michaelle'),\r\n"
-					+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu')");
-			
-			st.execute("insert into Personnel values \r\n" + "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
+				st.executeUpdate("insert into Personnel values \r\n" + "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
 					+ "(5, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
 					+ "(6, 'Lucas','HERNANDEZ', 'lucas.tata@gmail.com', 'employee1'),\r\n"
 					+ "(7, 'Steve' ,'MANDANDA', 'steve.tata@gmail.com', 'employee2'),\r\n"
@@ -305,14 +319,62 @@ public class AccesBDD {
 					+ "(12, 'Nabil','FEKIR', 'n.f@gmail.com', 'employee7'),\r\n"
 					+ "(13, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
 			
-			st.close();
+				st.executeUpdate("insert into Questionnaire values\r\n"
+					+"(1,'Employees Opinions','2018-07-18', '2018-07-30', 7)");
 			
-			connection.close();
-			
+				st.executeUpdate("insert into QuestionChoix values\r\n"
+					+"(1,1,'What do you think about the management of the enterprise ?',false),\r\n"
+					+"(3,1,'What do you think about the operation of the enterprise ?',false),\r\n"
+					+"(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',false),\r\n"
+					+"(7,1,'What do you think about your workspace ?',false),\r\n"
+					+"(9,1,'Are you satisfied with the available tools ?',false)");
+					
+				st.executeUpdate("insert into QuestionTexte values\r\n"
+					+"(2,1,'Explain your answer about the management',80,4),\r\n"
+					+"(4,1,'Explain your answer about the operation',80,4),\r\n"
+					+"(6,1,'Explain your answer about the collaboration',80,4),\r\n"
+					+"(8,1,'Explain your answer about the workspace',80,4),\r\n"
+					+"(10,1,'If not, explain why',80,4)");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+		try (Statement st = connection.createStatement()) {
+			ResultSet rs = st.executeQuery("SELECT * FROM question");
+			
+			while (rs.next()) {
+				System.out.println("t");
+				System.out.println(rs.getInt("question_id"));
+			}
+			
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		try (Statement st = connection.createStatement()) {
+
+			st.executeUpdate("insert into Choix values\r\n"
+				+"(1,'Very satisfied'),\r\n"
+				+"(1,'Moderately satisfied'),\r\n"
+				+"(1,'Unsatisfied'),\r\n"
+				+"(3,'Very satisfied'),\r\n"
+				+"(3,'Moderately satisfied'),\r\n"
+				+"(3,'Unsatisfied'),\r\n"
+				+"(5,'Very satisfied'),\r\n"
+				+"(5,'Moderately satisfied'),\r\n"
+				+"(5,'Unsatisfied'),\r\n"
+				+"(7,'Very satisfied'),\r\n"
+				+"(7,'Moderately satisfied'),\r\n"
+				+"(7,'Unsatisfied'),\r\n"
+				+"(9,'Yes'),\r\n"
+				+"(9,'No')");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
