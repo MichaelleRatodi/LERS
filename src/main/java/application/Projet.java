@@ -16,7 +16,7 @@ public class Projet extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//BorderPane root = new BorderPane();
-			Parent root = FXMLLoader.load(getClass().getResource("questionnaire/Questionnaire.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("sending/SendingPage.fxml"));
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);

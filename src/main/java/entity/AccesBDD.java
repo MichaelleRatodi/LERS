@@ -395,8 +395,10 @@ public class AccesBDD {
 								+ "(13, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
 				
 				st.executeUpdate("insert into Questionnaire values\r\n"
-						+ "(1,'Employees Opinions','2018-07-18', '2018-07-30', 7)");
-				
+					+"(1,'Employees Opinions','2018-07-18', '2018-07-30', 7),\r\n"
+					+"(2,'Employees Survey','2018-07-18', '2018-07-30', 7),\r\n"
+					+"(3,'Work Optimization','2018-07-18', '2018-07-30', 7)");
+			
 				st.executeUpdate("insert into QuestionChoix values\r\n"
 						+ "(1,1,'What do you think about the management of the enterprise ?',1,false),\r\n"
 						+ "(3,1,'What do you think about the operation of the enterprise ?',3,false),\r\n"
@@ -417,6 +419,28 @@ public class AccesBDD {
 		}
 		
 		try (Statement st = connection.createStatement()) {
+
+			st.executeUpdate("insert into Choix values\r\n"
+				+"(1,'Very satisfied'),\r\n"
+				+"(1,'Moderately satisfied'),\r\n"
+				+"(1,'Unsatisfied'),\r\n"
+				+"(3,'Very satisfied'),\r\n"
+				+"(3,'Moderately satisfied'),\r\n"
+				+"(3,'Unsatisfied'),\r\n"
+				+"(5,'Very satisfied'),\r\n"
+				+"(5,'Moderately satisfied'),\r\n"
+				+"(5,'Unsatisfied'),\r\n"
+				+"(7,'Very satisfied'),\r\n"
+				+"(7,'Moderately satisfied'),\r\n"
+				+"(7,'Unsatisfied'),\r\n"
+				+"(9,'Yes'),\r\n"
+				+"(9,'No')");
+
+			st.executeUpdate("insert into Liste values\r\n"
+				+"(1,' All Employees '),\r\n"
+				+"(2,' Human Resources'),\r\n"
+				+"(3,' Hierarchical Direction ')");
+
 			
 			st.executeUpdate("insert into Choix values\r\n" + "(1,'Very satisfied'),\r\n"
 					+ "(1,'Moderately satisfied'),\r\n" + "(1,'Unsatisfied'),\r\n" + "(3,'Very satisfied'),\r\n"
@@ -425,8 +449,6 @@ public class AccesBDD {
 					+ "(7,'Moderately satisfied'),\r\n" + "(7,'Unsatisfied'),\r\n" + "(9,'Yes'),\r\n" + "(9,'No'),"
 					+ "(11,'Management'),\r\n" + "(11,'Operation'),\r\n" + "(11,'Collaboration'),\r\n"
 					+ "(11,'Workspace'),\r\n" + "(11,'Tools')");
-			
-			st.executeUpdate("insert into Liste values\r\n" + "(1,'Employees'),\r\n" + "(2,'RH')");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
