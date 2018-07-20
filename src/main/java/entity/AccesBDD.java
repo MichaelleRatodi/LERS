@@ -418,6 +418,25 @@ public class AccesBDD {
 				+"(9,'Yes'),\r\n"
 				+"(9,'No')");
 
+			st.executeUpdate("insert into Liste values\r\n"
+				+"(1,'Employees'),\r\n"
+				+"(2,'RH')");
+
+			st.executeUpdate("insert into ListePersonnel values\r\n"
+				+"(1,4),\r\n"
+				+"(1,5),\r\n"
+				+"(1,6),\r\n"
+				+"(1,7),\r\n"
+				+"(1,8),\r\n"
+				+"(1,9),\r\n"
+				+"(1,10),\r\n"
+				+"(1,11),\r\n"
+				+"(1,12),\r\n"
+				+"(1,13),\r\n"
+				+"(2,1),\r\n"
+				+"(2,2),\r\n"
+				+"(2,3)");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
