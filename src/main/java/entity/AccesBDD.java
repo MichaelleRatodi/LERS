@@ -421,8 +421,9 @@ public class AccesBDD {
 				+"(9,'No')");
 
 			st.executeUpdate("insert into Liste values\r\n"
-				+"(1,'Employees'),\r\n"
-				+"(2,'RH')");
+				+"(1,' All Employees '),\r\n"
+				+"(2,' Human Resources'),\r\n"
+				+"(3,' Hierarchical Direction ')");
 
 			st.executeUpdate("insert into ListePersonnel values\r\n"
 				+"(1,4),\r\n"

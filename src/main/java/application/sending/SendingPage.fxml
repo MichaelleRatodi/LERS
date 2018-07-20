@@ -12,15 +12,15 @@
 	<children>
 		<ComboBox fx:id="choixQuestionnaire" layoutX="27.0" layoutY="107.0" prefHeight="25.0" prefWidth="176.0" promptText="Choose a questionnaire">
 		</ComboBox>
-		<CheckBox fx:id="hierarchicalDirection" layoutX="182.0" layoutY="286.0" mnemonicParsing="false" text="Hierarchical Direction" />
-		<CheckBox fx:id="humanResources" layoutX="181.0" layoutY="336.0" mnemonicParsing="false" text="Human Resources" />
-		<CheckBox fx:id="allEmployees" layoutX="181.0" layoutY="389.0" mnemonicParsing="false" text="All Employees" />
-		<Label fx:id="recipientList" layoutX="92.0" layoutY="248.0" text="Recipient list" />
-		<Button fx:id="send" layoutX="557.0" layoutY="516.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Send" />
-		<ImageView fitHeight="64.0" fitWidth="67.0" layoutX="649.0" layoutY="14.0">
-			<image>
-				<Image url="@../images/personnel.png" />
-			</image>
-		</ImageView>
+		<CheckBox fx:id="hierarchicalDirection" layoutX="181.0" layoutY="414.0" mnemonicParsing="false" text="Hierarchical Direction" />
+		<CheckBox fx:id="humanResources" layoutX="181.0" layoutY="362.0" mnemonicParsing="false" text="Human Resources" />
+		<CheckBox fx:id="allEmployees" layoutX="182.0" layoutY="307.0" mnemonicParsing="false" text="All Employees" />
+		<Label fx:id="recipient" layoutX="92.0" layoutY="248.0" text="Recipient list" />
+		<Button fx:id="send" layoutX="576.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Send" />
+      <ImageView fx:id="user" fitHeight="79.0" fitWidth="67.0" layoutX="671.0">
+         <image>
+            <Image url="@../images/logo-msn-messenger-mac.png" />
+         </image>
+      </ImageView>
 	</children>
 </Pane>
