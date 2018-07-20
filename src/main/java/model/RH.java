@@ -4,10 +4,11 @@ public class RH extends Personnel {
 	
 	private String pseudo;
 	private String motDePasse;
+	private int rh_id;
 	
 	public static String getSchema() {
 		return "create table RH (\r\n" + "Pseudo varchar(20) not null unique,\r\n"
-				+ "MotDePasse varchar(20) not null unique) inherits(Personnel)";
+				+ "MotDePasse varchar(20) not null unique," + "rh_id int unique not null) inherits(Personnel)";
 	}
 	
 	public static String getConstraints() {
@@ -16,9 +17,9 @@ public class RH extends Personnel {
 	}
 	
 	public static String[] getFields() {
-		return new String[] { "personnel_id", "nom", "prenom", "email", "metier", "pseudo", "motDePasse" };
+		return new String[] { "personnel_id", "nom", "prenom", "email", "metier", "pseudo", "motDePasse", "rh_id" };
 	}
-
+	
 	public int getPersonnel_id() {
 		return super.getPersonnel_id();
 	}
@@ -74,4 +75,13 @@ public class RH extends Personnel {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
+	
+	public int getRh_id() {
+		return rh_id;
+	}
+	
+	public void setRh_id(int rh_id) {
+		this.rh_id = rh_id;
+	}
+	
 }
