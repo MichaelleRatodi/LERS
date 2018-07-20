@@ -24,7 +24,7 @@
             </HBox>
             <HBox alignment="TOP_CENTER">
                <children>
-                  <Label text="Welcome to LERS !  ">
+                  <Label text="Welcome to LERS ">
                      <font>
                         <Font name="System Bold" size="64.0" />
                      </font>
@@ -34,19 +34,24 @@
                         <Font name="System Bold" size="64.0" />
                      </font>
                   </Label>
+                  <Label text=" !">
+                     <font>
+                        <Font name="System Bold" size="64.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="documents" fitHeight="94.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@./images/document-open-5.png" />
                            </image>
                         </ImageView>
-                        <Label text="Documents">
+                        <Label text="Créer Questionnaire">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></Label>
@@ -58,14 +63,14 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="diaries" fitHeight="110.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="questionnaire" fitHeight="110.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/agenda.png" />
                            </image>
                         </ImageView>
-                        <Label text="Diaries">
+                        <Label text="Remplir Questionnaire">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></Label>
@@ -77,7 +82,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="employees" fitHeight="134.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -99,7 +104,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="statistics" fitHeight="167.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -118,7 +123,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView fx:id="settings" fitHeight="334.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                            <image>

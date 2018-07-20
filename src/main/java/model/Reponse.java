@@ -7,8 +7,8 @@ public class Reponse {
 	private String contenuReponse;
 	
 	public static String getSchema() {
-		return "create table Reponse (\r\n" + "question_id int not null references Question(question_id),\r\n"
-				+ "personnel_id int not null references Personnel(personnel_id),\r\n"
+		return "create table Reponse (\r\n" + "question_id int not null,\r\n"
+				+ "personnel_id int not null,\r\n"
 				+ "contenuReponse text not null)";
 	}
 	

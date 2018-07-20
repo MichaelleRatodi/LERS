@@ -228,6 +228,12 @@ public class AccesBDD {
 			for (int i = 0; i < arguments.length; i++) {
 				String columnType = rsmd.getColumnTypeName(i + 1);
 				switch (columnType) {
+				case "bool":
+					method = objet.getClass().getDeclaredMethod(
+							"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
+							boolean.class);
+					method.invoke(objet, rs.getBoolean(i + 1));
+					break;
 				case "serial":
 				case "int4":
 					method = objet.getClass().getDeclaredMethod(
@@ -279,6 +285,12 @@ public class AccesBDD {
 				for (int i = 0; i < arguments.length; i++) {
 					String columnType = rsmd.getColumnTypeName(i + 1);
 					switch (columnType) {
+					case "bool":
+						method = item.getClass().getDeclaredMethod(
+								"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
+								boolean.class);
+						method.invoke(item, rs.getBoolean(i + 1));
+						break;
 					case "serial":
 					case "int4":
 						method = item.getClass().getDeclaredMethod(
@@ -390,7 +402,8 @@ public class AccesBDD {
 						+ "(3,1,'What do you think about the operation of the enterprise ?',3,false),\r\n"
 						+ "(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',5,false),\r\n"
 						+ "(7,1,'What do you think about your workspace ?',7,false),\r\n"
-						+ "(9,1,'Are you satisfied with the available tools ?',9,false)");
+						+ "(9,1,'Are you satisfied with the available tools ?',9,false),\r\n"
+						+ "(11,1,'Which aspects of the entreprise are you satisfied with ?',11,true)");
 				
 				st.executeUpdate("insert into QuestionTexte values\r\n"
 						+ "(2,1,'Explain your answer about the management',80,4),\r\n"
@@ -409,7 +422,9 @@ public class AccesBDD {
 					+ "(1,'Moderately satisfied'),\r\n" + "(1,'Unsatisfied'),\r\n" + "(3,'Very satisfied'),\r\n"
 					+ "(3,'Moderately satisfied'),\r\n" + "(3,'Unsatisfied'),\r\n" + "(5,'Very satisfied'),\r\n"
 					+ "(5,'Moderately satisfied'),\r\n" + "(5,'Unsatisfied'),\r\n" + "(7,'Very satisfied'),\r\n"
-					+ "(7,'Moderately satisfied'),\r\n" + "(7,'Unsatisfied'),\r\n" + "(9,'Yes'),\r\n" + "(9,'No')");
+					+ "(7,'Moderately satisfied'),\r\n" + "(7,'Unsatisfied'),\r\n" + "(9,'Yes'),\r\n" + "(9,'No'),"
+					+ "(11,'Management'),\r\n" + "(11,'Operation'),\r\n" + "(11,'Collaboration'),\r\n"
+					+ "(11,'Workspace'),\r\n" + "(11,'Tools')");
 			
 			st.executeUpdate("insert into Liste values\r\n" + "(1,'Employees'),\r\n" + "(2,'RH')");
 			
