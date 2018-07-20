@@ -51,14 +51,18 @@ public class DocumentsViewController extends MainViewController {
 	private List<Button> addChoices = new ArrayList<Button>();
 	@FXML
 	private TextField addLabelChoice = new TextField();
-	
-	private List<TextField> addLabelChoices = new ArrayList<TextField>();
 	@FXML
 	private TextField questionLabel = new TextField();
 	@FXML
 	private VBox listeQuestions = new VBox();
 	@FXML
 	private AnchorPane questionPane = new AnchorPane();
+	@FXML
+	private TextField freeAnswerWidth = new TextField();
+	@FXML
+	private TextField freeAnswerHeigth = new TextField();
+	
+	private List<TextField> addLabelChoices = new ArrayList<TextField>();
 	
 	private List<TextField> listeLabels = new ArrayList<TextField>();
 	
@@ -68,7 +72,9 @@ public class DocumentsViewController extends MainViewController {
 	
 	private List<RadioButton> listeFreeChoice = new ArrayList<RadioButton>();
 	
-	private List<TextArea> listeFreeAnswers = new ArrayList<TextArea>();
+	private List<TextField> listeFreeAnswerWidth = new ArrayList<TextField>();
+	
+	private List<TextField> listeFreeAnswerHeight = new ArrayList<TextField>();
 	
 	private Questionnaire questionnaire;
 	
@@ -97,7 +103,7 @@ public class DocumentsViewController extends MainViewController {
 				}
 				saveQuestionnaire(questionnaire);
 				
-				showAlertMessage();
+				showAlertMessage(loginManager, user);
 			}
 		});
 		
@@ -107,6 +113,8 @@ public class DocumentsViewController extends MainViewController {
 		listeMultipleChoices.add(new ArrayList<Label>());
 		listeFreeChoice.add(freeChoice);
 		addLabelChoices.add(addLabelChoice);
+		listeFreeAnswerWidth.add(freeAnswerWidth);
+		listeFreeAnswerHeight.add(freeAnswerHeigth);
 		
 		addChoices.add(addChoice);
 		addChoices.get(0).addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -123,7 +131,6 @@ public class DocumentsViewController extends MainViewController {
 				newLabel.setId("" + index);
 				newLabel.setLayoutX(200 + 100 * index);
 				questionPane.getChildren().add(newLabel);
-				System.out.println("event.getSource().getClass()" + event.getSource().getClass());
 				listeMultipleChoices.get(0).add(newLabel);
 			}
 		});
@@ -164,7 +171,7 @@ public class DocumentsViewController extends MainViewController {
 				addChoice.setText("Add Choice");
 				addChoice.setLayoutX(41);
 				addChoice.setLayoutY(125);
-				System.out.println("nbQuestions" + nbQuestions);
+				
 				addChoices.add(addChoice);
 				addChoices.get(nbQuestions - 1).addEventHandler(MouseEvent.MOUSE_CLICKED,
 						new EventHandler<MouseEvent>() {
@@ -181,7 +188,6 @@ public class DocumentsViewController extends MainViewController {
 								newLabel.setId("" + index);
 								newLabel.setLayoutX(200 + 100 * index);
 								newAP.getChildren().add(newLabel);
-								System.out.println("event.getSource().getClass()" + event.getSource().getClass());
 								listeMultipleChoices.get(nbQuestions - 1).add(newLabel);
 							}
 						});
@@ -190,19 +196,25 @@ public class DocumentsViewController extends MainViewController {
 				newRadioFreeChoice.setLayoutX(23);
 				newRadioFreeChoice.setLayoutY(162);
 				newRadioFreeChoice.setToggleGroup(tg);
-				TextArea newTextAnswer = new TextArea();
-				newTextAnswer.setPromptText("Text response example");
-				newTextAnswer.setLayoutX(23);
-				newTextAnswer.setLayoutY(198);
-				newTextAnswer.setPrefHeight(100);
-				newTextAnswer.setPrefWidth(500);
+				
+				TextField newFreeAnswerWidth = new TextField();
+				newFreeAnswerWidth.setLayoutX(103);
+				newFreeAnswerWidth.setLayoutY(188);
+				newFreeAnswerWidth.setPrefHeight(26);
+				newFreeAnswerWidth.setPrefWidth(59);
+				TextField newFreeAnswerHeight = new TextField();
+				newFreeAnswerHeight.setLayoutX(103);
+				newFreeAnswerHeight.setLayoutY(218);
+				newFreeAnswerHeight.setPrefHeight(26);
+				newFreeAnswerHeight.setPrefWidth(59);
 				
 				newAP.getChildren().add(newLabel);
 				newAP.getChildren().add(newRadioMultipleChoice);
 				newAP.getChildren().add(newLabelChoice);
 				newAP.getChildren().add(addChoice);
 				newAP.getChildren().add(newRadioFreeChoice);
-				newAP.getChildren().add(newTextAnswer);
+				newAP.getChildren().add(newFreeAnswerWidth);
+				newAP.getChildren().add(newFreeAnswerHeight);
 				newQuestion.setContent(newAP);
 				
 				listeQuestions.getChildren().add(newQuestion);
@@ -210,19 +222,21 @@ public class DocumentsViewController extends MainViewController {
 				listeLabels.add(newLabel);
 				listeMultipleChoice.add(newRadioMultipleChoice);
 				listeFreeChoice.add(newRadioFreeChoice);
-				listeFreeAnswers.add(newTextAnswer);
+				listeFreeAnswerWidth.add(newFreeAnswerWidth);
+				listeFreeAnswerHeight.add(newFreeAnswerHeight);
 			}
 		});
 		
 	}
 	
-	private void showAlertMessage() {
+	private void showAlertMessage(LoginManager loginManager, RH user) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText("Form Saved");
 		alert.setContentText("Your form have been saved!");
 		
 		alert.showAndWait();
+		loginManager.showMainView(user);
 	}
 	
 	private int saveQuestionnaire(Questionnaire questionnaire) {
@@ -241,8 +255,8 @@ public class DocumentsViewController extends MainViewController {
 				QuestionTexte newQuestT = new QuestionTexte();
 				newQuestT.setLibelle(listeLabels.get(i).getText());
 				newQuestT.setQuestionnaire_id(idForm);
-				newQuestT.setNbColonnesZoneTexte(5);
-				newQuestT.setNbLignesZoneTexte(5);
+				newQuestT.setNbColonnesZoneTexte(Integer.parseInt(listeFreeAnswerWidth.get(i).getText()));
+				newQuestT.setNbLignesZoneTexte(Integer.parseInt(listeFreeAnswerHeight.get(i).getText()));
 				abdd.insererObjet(newQuestT);
 			} else {
 				QuestionChoix newQuestC = new QuestionChoix();
@@ -257,7 +271,7 @@ public class DocumentsViewController extends MainViewController {
 				
 				for (Label strChoix : listeMultipleChoices.get(i)) {
 					Choix newChoix = new Choix();
-					newChoix.setChoix_id(newQuestId);System.out.println("newQuestId "+newQuestId);
+					newChoix.setChoix_id(newQuestId);
 					newChoix.setLibelle(strChoix.getText());
 					abdd.insererObjet(newChoix);
 				}

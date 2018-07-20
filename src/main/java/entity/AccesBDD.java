@@ -105,8 +105,6 @@ public class AccesBDD {
 				ResultSet rs = st.executeQuery(requete.toString());
 				rs.next();
 				newIndex = rs.getInt(1) + 1;
-				System.out.println("class " + objet.getClass().getSimpleName());
-				System.out.println("newIndex " + newIndex);
 			}
 			requete = new StringBuilder("insert into " + objet.getClass().getSimpleName() + " (");
 			Method method;
@@ -297,7 +295,6 @@ public class AccesBDD {
 								"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
 								LocalDate.class);
 						String date = rs.getString(i + 1);
-						System.out.println(date);
 						method.invoke(item, LocalDate.of(Integer.parseInt(date.substring(0, 4)),
 								Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10))));
 						break;
@@ -359,17 +356,17 @@ public class AccesBDD {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void remplirBDD() {
 		try (Statement st = connection.createStatement()) {
-			ResultSet result= st.executeQuery("select count(*) AS nb from RH");
+			ResultSet result = st.executeQuery("select count(*) AS nb from RH");
 			result.next();
 			if (result.getInt("nb") == 0) {
 				st.executeUpdate("insert into RH values\r\n"
 						+ "(1, 'Bréhu', 'Soraya', 'soraya.brehu@gmail.com', 'RH', 'linda', '1234'),\r\n"
 						+ "(2, 'Ratodiarivony', 'Michaëlle', 'michaelle.ratodi@gmail.com', 'RH', 'michaelle', 'michaelle'),\r\n"
 						+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu')");
-			
+
 				st.executeUpdate("insert into Personnel values \r\n" 
 					+ "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
 					+ "(5, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
@@ -395,11 +392,11 @@ public class AccesBDD {
 					+"(9,1,'Are you satisfied with the available tools ?',9,false)");
 					
 				st.executeUpdate("insert into QuestionTexte values\r\n"
-					+"(2,1,'Explain your answer about the management',80,4),\r\n"
-					+"(4,1,'Explain your answer about the operation',80,4),\r\n"
-					+"(6,1,'Explain your answer about the collaboration',80,4),\r\n"
-					+"(8,1,'Explain your answer about the workspace',80,4),\r\n"
-					+"(10,1,'If not, explain why',80,4)");
+						+ "(2,1,'Explain your answer about the management',80,4),\r\n"
+						+ "(4,1,'Explain your answer about the operation',80,4),\r\n"
+						+ "(6,1,'Explain your answer about the collaboration',80,4),\r\n"
+						+ "(8,1,'Explain your answer about the workspace',80,4),\r\n"
+						+ "(10,1,'If not, explain why',80,4)");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -422,6 +419,25 @@ public class AccesBDD {
 				+"(7,'Unsatisfied'),\r\n"
 				+"(9,'Yes'),\r\n"
 				+"(9,'No')");
+
+			st.executeUpdate("insert into Liste values\r\n"
+				+"(1,'Employees'),\r\n"
+				+"(2,'RH')");
+
+			st.executeUpdate("insert into ListePersonnel values\r\n"
+				+"(1,4),\r\n"
+				+"(1,5),\r\n"
+				+"(1,6),\r\n"
+				+"(1,7),\r\n"
+				+"(1,8),\r\n"
+				+"(1,9),\r\n"
+				+"(1,10),\r\n"
+				+"(1,11),\r\n"
+				+"(1,12),\r\n"
+				+"(1,13),\r\n"
+				+"(2,1),\r\n"
+				+"(2,2),\r\n"
+				+"(2,3)");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
