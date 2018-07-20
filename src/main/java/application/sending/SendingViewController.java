@@ -18,6 +18,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
+import model.Personnel;
+import model.Question;
 import model.Questionnaire;
 import java.lang.String;
 
@@ -39,16 +41,12 @@ public class SendingViewController implements Initializable {
 
 	@FXML
 	private CheckBox allEmployees = new CheckBox();
-
+	
 	@FXML
 	private Label recipientList = new Label();
 
 	@FXML
 	private Button send = new Button();
-
-	ObservableList<Questionnaire> questionnaires = FXCollections.observableArrayList(
-
-	);
 
 	public SendingViewController() {
 
@@ -56,20 +54,35 @@ public class SendingViewController implements Initializable {
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-		comboCollection = FXCollections.observableArrayList(
-				"test","test1"
-							);
+		
+//		comboCollection = FXCollections.observableArrayList(
+//				"test","test1"
+//							);
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		//pour récupérer les questionnaires de la base de données
+			AccesBDD abdd = AccesBDD.getInstance();
+			
+		//ObservableList pour afficher le choix dans le ComboBox
+			ObservableList<Questionnaire> questionnaires = FXCollections.observableArrayList(
 
-		questionnaires.add(new Questionnaire(1, "Q1", LocalDate.now(), LocalDate.now(), 100));
-		questionnaires.add(new Questionnaire(2, "Q2", LocalDate.now(), LocalDate.now(), 100));
-		questionnaires.add(new Questionnaire(3, "Q3", LocalDate.now(), LocalDate.now(), 100));
+						);
+			try {
+				questionnaires = FXCollections.observableArrayList(abdd.recupererTousObjets(new Questionnaire()));
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+
+//		questionnaires.add(new Questionnaire(1, "Q1", LocalDate.now(), LocalDate.now(), 100));
+//		questionnaires.add(new Questionnaire(2, "Q2", LocalDate.now(), LocalDate.now(), 100));
+//		questionnaires.add(new Questionnaire(3, "Q3", LocalDate.now(), LocalDate.now(), 100));
 		
 		choixQuestionnaire.getItems().clear();
+		
+		choixQuestionnaire.setItems(questionnaires);
         
 		choixQuestionnaire.valueProperty()
 				.addListener((obs, oldVal, newVal) -> System.out.println("Questionnaire : " + newVal.getTitre()));
@@ -85,14 +98,20 @@ public class SendingViewController implements Initializable {
 				return null;
 			}
 		});
-		choixQuestionnaire.setItems(questionnaires);
+		
 	
-//		comboCollection = FXCollections.observableArrayList(
-//
-//				);
-//		comboCollection.add("test1");
-//		comboCollection.add("test2");
-//		comboCollection.add("test3");
+		//pour récupérer la liste du personnel de la base de données
+		
+		List<Personnel> employeeList = new ArrayList<>();
+			
+		try {
+			employeeList= (List<Personnel>) abdd.recupererTousObjets(new Personnel());
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		//pour afficher dans le checkbox
+		
+		allEmployees.setItems(employeeList);	
 	}
 
 }

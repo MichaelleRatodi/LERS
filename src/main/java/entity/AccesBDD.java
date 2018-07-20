@@ -383,7 +383,9 @@ public class AccesBDD {
 					+ "(13, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
 			
 				st.executeUpdate("insert into Questionnaire values\r\n"
-					+"(1,'Employees Opinions','2018-07-18', '2018-07-30', 7)");
+					+"(1,'Employees Opinions','2018-07-18', '2018-07-30', 7),\r\n"
+					+"(2,'Employees Survey','2018-07-18', '2018-07-30', 7),\r\n"
+					+"(3,'Work Optimization','2018-07-18', '2018-07-30', 7)");
 			
 				st.executeUpdate("insert into QuestionChoix values\r\n"
 					+"(1,1,'What do you think about the management of the enterprise ?',1,false),\r\n"

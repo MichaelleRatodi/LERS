@@ -100,6 +100,7 @@ public class QuestionnaireViewController implements Initializable {
 //		AccesBDD abdd = AccesBDD.getInstance();
 //		abdd.remplirBDD();
 //		Statement st;
+		
 		//pour récupérer les questions de la base de données
 		AccesBDD abdd = AccesBDD.getInstance();
 		Questionnaire quest = new Questionnaire();
@@ -136,9 +137,9 @@ public class QuestionnaireViewController implements Initializable {
 		});
 	}
 	
+	// pour insérer les réponses dans la table Reponse
 	private void sendFunction(Reponse reponses) {
-		// pour insérer les réponses dans la table Reponse
-		
+				
 			AccesBDD abdd = AccesBDD.getInstance();
 			abdd.insererObjet(reponses);
 		}
