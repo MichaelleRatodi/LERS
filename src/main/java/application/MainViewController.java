@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -10,10 +11,10 @@ import application.documents.DocumentsViewController;
 import application.employee.EmployeeViewController;
 import application.login.LoginManager;
 import application.questionnaire.QuestionnaireViewController;
+import application.statistics.StatisticsViewController;
 import application.users.UserInfoController;
 import entity.AccesBDD;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -75,6 +76,14 @@ public class MainViewController extends UserInfoController {
 				showQuestionnaireSelectionView(loginManager, user);
 			}
 		});
+
+		statistics.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				
+				showStatisticsView(loginManager, user);
+			}
+		});
 		
 	}
 	
@@ -125,6 +134,18 @@ public class MainViewController extends UserInfoController {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
+
+	private void showStatisticsView(LoginManager loginManager, RH user) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("./statistics/statisticsview.fxml"));
+			loginManager.getScene().setRoot((Parent) loader.load());
+			StatisticsViewController controller = loader.<StatisticsViewController>getController();
+			controller.initialize(loginManager, user);
+			((Stage) loginManager.getScene().getWindow()).setMaximized(true);
+		} catch (IOException ex) {
+			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 	
 	private void showQuestionnaireView(LoginManager loginManager, RH user, String titreQuest) {
 		try {
@@ -146,7 +167,7 @@ public class MainViewController extends UserInfoController {
 		dialogVbox.getChildren().add(new Text("Sélection Questionnaire"));
 		Scene scene = new Scene(dialogVbox, 400, 600);
 		create.setScene(scene);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("selectionquestionnaire.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("questionnaire/selectionquestionnaire.fxml"));
 		try {
 			scene.setRoot((Parent) loader.load());
 		} catch (IOException e) {
