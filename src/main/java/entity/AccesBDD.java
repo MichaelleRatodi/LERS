@@ -454,12 +454,19 @@ public class AccesBDD {
 		
 		try (Statement st = connection.createStatement()) {
 			
+			st.executeUpdate("insert into ListePersonnel (liste_id, personnel_id) values\r\n" + "(2,4),\r\n"
+					+ "(2,5),\r\n" + "(2,6),\r\n" + "(2,7),\r\n" + "(2,8),\r\n" + "(2,9),\r\n" + "(2,10),\r\n"
+					+ "(2,11),\r\n" + "(2,12),\r\n" + "(2,13)");
+			
+			st.executeUpdate(
+					"insert into ListePersonnel (liste_id, rh_id) values\r\n" + "(3,1),\r\n" + "(3,2),\r\n" + "(3,3)");
+			
 			st.executeUpdate("insert into ListePersonnel (liste_id, personnel_id) values\r\n" + "(1,4),\r\n"
 					+ "(1,5),\r\n" + "(1,6),\r\n" + "(1,7),\r\n" + "(1,8),\r\n" + "(1,9),\r\n" + "(1,10),\r\n"
 					+ "(1,11),\r\n" + "(1,12),\r\n" + "(1,13)");
 			
 			st.executeUpdate(
-					"insert into ListePersonnel (liste_id, rh_id) values\r\n" + "(2,1),\r\n" + "(2,2),\r\n" + "(2,3)");
+					"insert into ListePersonnel (liste_id, rh_id) values\r\n" + "(1,1),\r\n" + "(1,2),\r\n" + "(1,3)");
 			
 			st.executeUpdate("insert into QuestionnairePersonnel (questionnaire_id, personnel_id) values\r\n"
 					+ "(1,4),\r\n" + "(1,5),\r\n" + "(1,6),\r\n" + "(2,7),\r\n" + "(2,8),\r\n" + "(2,9)");

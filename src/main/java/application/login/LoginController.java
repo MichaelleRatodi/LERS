@@ -19,6 +19,8 @@ public class LoginController {
 	@FXML
 	private Button loginButton;
 	@FXML
+	private Button exitButton;
+	@FXML
 	private Hyperlink hyperlink = new Hyperlink();
 	
 	private RH userConnected = null;
@@ -43,6 +45,12 @@ public class LoginController {
 			public void handle(ActionEvent e) {
 				System.out.println("Forgot your password link is clicked");
 				loginManager.passwordForgotten();
+			}
+		});
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
 			}
 		});
 	}

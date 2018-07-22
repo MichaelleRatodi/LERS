@@ -28,6 +28,7 @@
           		<TextField fx:id="user" layoutX="352.0" layoutY="114.0" />
           		<PasswordField fx:id="password" layoutX="352.0" layoutY="153.0" />
             	<Button fx:id="loginButton" alignment="CENTER" defaultButton="true" layoutX="477.0" layoutY="246.0" mnemonicParsing="false" text="Login" />
+            	<Button fx:id="exitButton" alignment="CENTER" layoutX="350.0" layoutY="246.0" mnemonicParsing="false" text="Quit" />
                 <Hyperlink fx:id="hyperlink" layoutX="355.0" layoutY="195.0" text="Forgot your password?" />
                </children>
             </Pane>

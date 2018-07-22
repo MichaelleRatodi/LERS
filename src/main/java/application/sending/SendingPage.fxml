@@ -7,16 +7,28 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.sending.SendingViewController">
 	<children>
-		<ComboBox fx:id="choixQuestionnaire" layoutX="27.0" layoutY="107.0" prefHeight="25.0" prefWidth="176.0" promptText="Choose a questionnaire">
+		<ComboBox fx:id="choixQuestionnaire" layoutX="25.0" layoutY="150.0" prefHeight="25.0" prefWidth="176.0" promptText="Choose a questionnaire">
 		</ComboBox>
-		<CheckBox fx:id="hierarchicalDirection" layoutX="181.0" layoutY="414.0" mnemonicParsing="false" text="Hierarchical Direction" />
-		<CheckBox fx:id="humanResources" layoutX="181.0" layoutY="362.0" mnemonicParsing="false" text="Human Resources" />
-		<CheckBox fx:id="allEmployees" layoutX="182.0" layoutY="307.0" mnemonicParsing="false" text="All Employees" />
-		<Label fx:id="recipient" layoutX="92.0" layoutY="248.0" text="Recipient list" />
-		<Button fx:id="send" layoutX="576.0" layoutY="531.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Send" />
+		<Label fx:id="recipient" layoutX="25.0" layoutY="200.0" text="Recipient list" />
+		<CheckBox fx:id="hierarchicalDirection" layoutX="25.0" layoutY="250.0" mnemonicParsing="false" text="Hierarchical Direction" />
+		<CheckBox fx:id="humanResources" layoutX="25.0" layoutY="300.0" mnemonicParsing="false" text="Human Resources" />
+		<CheckBox fx:id="allEmployees" layoutX="25.0" layoutY="350.0" mnemonicParsing="false" text="All Employees" />
+		<Button fx:id="send" layoutX="25.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Send" />
+			<HBox layoutX="50" layoutY="50" prefHeight="43.0"
+				prefWidth="708.0">
+				<children>
+					<ImageView fx:id="home" fitHeight="80.0" fitWidth="118.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@../images/720355.png" />
+						</image>
+					</ImageView>
+				</children>
+			</HBox>
       <ImageView fx:id="user" fitHeight="79.0" fitWidth="67.0" layoutX="671.0">
          <image>
             <Image url="@../images/logo-msn-messenger-mac.png" />
