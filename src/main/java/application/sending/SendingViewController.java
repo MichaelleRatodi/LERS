@@ -1,13 +1,10 @@
 package application.sending;
 
-import java.net.URL;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import application.MainViewController;
 import application.login.LoginManager;
@@ -16,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -211,10 +207,10 @@ public class SendingViewController extends MainViewController {
 							message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
 							
 							// Set Subject: header field
-							message.setSubject("Test LERS");
+							message.setSubject("Questionnaire -b"+choixQuestionnaire.getValue().getTitre());
 							
 							// Now set the actual message
-							message.setText("Test LERS");
+							message.setText("LERS vous invite à remplir le Questionnaire : "+choixQuestionnaire.getValue().getTitre());
 							
 							// Send message
 							Transport.send(message);
