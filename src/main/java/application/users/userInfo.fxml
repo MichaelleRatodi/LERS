@@ -7,27 +7,36 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.users.MainViewController">
-  <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
-         <children>
-                <Label fx:id="sessionLabel" layoutX="446.0" layoutY="9.0" text="Undefined" />
+<StackPane prefHeight="400.0" prefWidth="600.0"
+	xmlns="http://javafx.com/javafx/8.0.181"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.users.MainViewController">
+	<children>
+		<Pane prefHeight="200.0" prefWidth="200.0">
+			<children>
+				<Label fx:id="sessionLabel" layoutX="446.0" layoutY="9.0"
+					text="Undefined" />
 
-  
-                <Button id="loginButton" fx:id="logoutButton" alignment="CENTER" defaultButton="true" layoutX="512.0" layoutY="5.0" mnemonicParsing="false" text="Logout" />
-            <Label layoutX="104.0" layoutY="36.0" prefHeight="35.0" prefWidth="224.0" text="Welcome to LERS !">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="usernameLabel" layoutX="328.0" layoutY="36.0" text="Username">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font></Label>
-         </children>
-      </Pane>
-  </children>
-  <padding>
-    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-  </padding>
+
+				<Button id="loginButton" fx:id="logoutButton"
+					alignment="CENTER" defaultButton="true" layoutX="512.0"
+					layoutY="5.0" mnemonicParsing="false" text="Logout" />
+				<Label layoutX="104.0" layoutY="36.0" prefHeight="35.0"
+					prefWidth="224.0" text="Welcome to LERS !">
+					<font>
+						<Font name="System Bold" size="24.0" />
+					</font>
+				</Label>
+				<Label fx:id="usernameLabel" layoutX="328.0" layoutY="36.0"
+					text="Username">
+					<font>
+						<Font name="System Bold" size="24.0" />
+					</font>
+				</Label>
+			</children>
+		</Pane>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
 </StackPane>
