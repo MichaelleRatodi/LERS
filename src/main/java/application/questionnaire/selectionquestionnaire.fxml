@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.181"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.MainViewController">
+	<children>
+		<VBox>
+			<children>
+				<ComboBox fx:id="selectionQuestionnaire"
+					promptText="Select Survey" />
+				<Button fx:id="envoyer" layoutX="100.0" layoutY="100.0"
+					mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0"
+					text="Send" />
+			</children>
+		</VBox>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+</StackPane>

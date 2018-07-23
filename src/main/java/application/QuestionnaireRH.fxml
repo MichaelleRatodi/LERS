@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <CheckBox layoutX="402.0" layoutY="140.0" mnemonicParsing="false" text="Unsatisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></CheckBox>
+      <CheckBox layoutX="204.0" layoutY="141.0" mnemonicParsing="false" text="Moderately Satisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </CheckBox>
+      <CheckBox layoutX="45.0" layoutY="140.0" mnemonicParsing="false" text="Very Satisfied" />
+      <TextArea layoutX="21.0" layoutY="602.0" prefHeight="38.0" prefWidth="673.0" text="Question 4b : If not, why ?" />
+      <CheckBox layoutX="404.0" layoutY="322.0" mnemonicParsing="false" text="Unsatisfied" textAlignment="CENTER" />
+      <CheckBox layoutX="206.0" layoutY="323.0" mnemonicParsing="false" text="Moderately Satisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </CheckBox>
+      <CheckBox layoutX="47.0" layoutY="322.0" mnemonicParsing="false" text="Very Satisfied" />
+      <TextArea layoutX="16.0" layoutY="270.0" prefHeight="38.0" prefWidth="673.0" text="Question 2 : What do you think about the operation of the enterprise?" />
+      <CheckBox layoutX="380.0" layoutY="489.0" mnemonicParsing="false" text="Unsatisfied" textAlignment="CENTER" />
+      <CheckBox layoutX="182.0" layoutY="490.0" mnemonicParsing="false" text="Moderately Satisfied" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </CheckBox>
+      <CheckBox layoutX="23.0" layoutY="489.0" mnemonicParsing="false" text="Very Satisfied" />
+      <TextArea layoutX="20.0" layoutY="443.0" prefHeight="38.0" prefWidth="673.0" text="Question 3 : What do you think about your workspace ?" />
+      <TextArea layoutX="14.0" layoutY="167.0" prefHeight="38.0" prefWidth="673.0" text="Question 1b : Explain your answer about the management " />
+      <TextArea layoutX="16.0" layoutY="209.0" prefHeight="49.0" prefWidth="673.0" />
+      <TextArea layoutX="20.0" layoutY="349.0" prefHeight="38.0" prefWidth="673.0" text="Question 2b : Explain your answer about the operation" />
+      <TextArea layoutX="20.0" layoutY="391.0" prefHeight="49.0" prefWidth="673.0" />
+      <TextArea layoutX="23.0" layoutY="520.0" prefHeight="38.0" prefWidth="673.0" text="Question 4 : Are you satisfied with the available tools?" />
+      <RadioButton layoutX="20.0" layoutY="573.0" mnemonicParsing="false" text="Yes" />
+      <RadioButton layoutX="101.0" layoutY="572.0" mnemonicParsing="false" text="No" />
+      <TextArea layoutX="20.0" layoutY="86.0" prefHeight="38.0" prefWidth="673.0" text="Question 1 : What do you think about the operation of the enterprise?" />
+      <ImageView fitHeight="76.0" fitWidth="79.0" layoutX="638.0">
+         <image>
+            <Image url="@images/logo-msn-messenger-mac.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

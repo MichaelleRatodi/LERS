@@ -9,146 +9,191 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainViewController">
-  <children>
-      <VBox>
-         <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="img" fitHeight="84.0" fitWidth="82.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@./images/logo-msn-messenger-mac.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER">
-               <children>
-                  <Label text="Welcome to LERS !  ">
-                     <font>
-                        <Font name="System Bold" size="64.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="usernameLabel" text="Username">
-                     <font>
-                        <Font name="System Bold" size="64.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fx:id="documents" fitHeight="94.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@./images/document-open-5.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Documents">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fx:id="diaries" fitHeight="110.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/agenda.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Diaries">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fx:id="employees" fitHeight="134.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@./images/employee-engagement-innovation-icon.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label text="Employees">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fx:id="statistics" fitHeight="167.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@./images/6e77ee6a-14da-44f6-8f19-c5a0b9c3083c.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Statistics">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fx:id="settings" fitHeight="334.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/parametre.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Settings">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font></Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
-  </children>
-  <padding>
-    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-  </padding>
+<StackPane xmlns="http://javafx.com/javafx/8.0.181"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.MainViewController">
+	<children>
+		<VBox>
+			<children>
+				<HBox alignment="TOP_RIGHT" prefHeight="100.0"
+					prefWidth="200.0">
+					<children>
+						<ImageView fx:id="img" fitHeight="84.0" fitWidth="82.0"
+							nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@./images/logo-msn-messenger-mac.png" />
+							</image>
+						</ImageView>
+					</children>
+				</HBox>
+				<HBox alignment="TOP_CENTER">
+					<children>
+						<Label text="Welcome to LERS ">
+							<font>
+								<Font name="System Bold" size="64.0" />
+							</font>
+						</Label>
+						<Label fx:id="usernameLabel" text="Username">
+							<font>
+								<Font name="System Bold" size="64.0" />
+							</font>
+						</Label>
+						<Label text=" !">
+							<font>
+								<Font name="System Bold" size="64.0" />
+							</font>
+						</Label>
+					</children>
+				</HBox>
+				<HBox prefHeight="100.0" prefWidth="180.0" />
+				<HBox alignment="TOP_CENTER" prefHeight="100.0"
+					prefWidth="190.0">
+					<children>
+						<VBox alignment="TOP_CENTER" prefHeight="200.0"
+							prefWidth="190.0">
+							<children>
+								<ImageView fx:id="documents" fitHeight="94.0"
+									fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@./images/document-open-5.png" />
+									</image>
+								</ImageView>
+								<Label text="Create Survey">
+									<font>
+										<Font name="System Bold" size="14.0" />
+									</font>
+								</Label>
+							</children>
+							<HBox.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</HBox.margin>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</padding>
+						</VBox>
+						<VBox alignment="CENTER" prefHeight="200.0" prefWidth="190.0">
+							<children>
+								<ImageView fx:id="questionnaire" fitHeight="110.0"
+									fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@images/agenda.png" />
+									</image>
+								</ImageView>
+								<Label text="Fill in Survey">
+									<font>
+										<Font name="System Bold" size="14.0" />
+									</font>
+								</Label>
+							</children>
+							<HBox.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</HBox.margin>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</padding>
+						</VBox>
+						<VBox alignment="CENTER" prefHeight="200.0" prefWidth="190.0">
+							<children>
+								<ImageView fx:id="Squestionnaire" fitHeight="110.0"
+									fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@images/agenda.png" />
+									</image>
+								</ImageView>
+								<Label text="Send Survey">
+									<font>
+										<Font name="System Bold" size="14.0" />
+									</font>
+								</Label>
+							</children>
+							<HBox.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</HBox.margin>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</padding>
+						</VBox>
+						<VBox alignment="CENTER" prefHeight="200.0" prefWidth="190.0">
+							<children>
+								<ImageView fx:id="employees" fitHeight="134.0"
+									fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image
+											url="@./images/employee-engagement-innovation-icon.png" />
+									</image>
+									<VBox.margin>
+										<Insets />
+									</VBox.margin>
+								</ImageView>
+								<Label text="Employees">
+									<font>
+										<Font name="System Bold" size="14.0" />
+									</font>
+								</Label>
+							</children>
+							<HBox.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</HBox.margin>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</padding>
+						</VBox>
+						<VBox alignment="CENTER" prefHeight="200.0" prefWidth="190.0">
+							<children>
+								<ImageView fx:id="statistics" fitHeight="167.0"
+									fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image
+											url="@./images/6e77ee6a-14da-44f6-8f19-c5a0b9c3083c.png" />
+									</image>
+								</ImageView>
+								<Label text="Statistics">
+									<font>
+										<Font name="System Bold" size="14.0" />
+									</font>
+								</Label>
+							</children>
+							<HBox.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</HBox.margin>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</padding>
+						</VBox>
+						<VBox alignment="CENTER" prefHeight="200.0" prefWidth="190.0">
+							<children>
+								<ImageView fx:id="settings" fitHeight="334.0"
+									fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@images/parametre.png" />
+									</image>
+								</ImageView>
+								<Label text="Settings">
+									<font>
+										<Font name="System Bold" size="14.0" />
+									</font>
+								</Label>
+							</children>
+							<HBox.margin>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</HBox.margin>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+							</padding>
+						</VBox>
+					</children>
+					<padding>
+						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+					</padding>
+					<VBox.margin>
+						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+					</VBox.margin>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
 </StackPane>
