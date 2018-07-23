@@ -13,7 +13,7 @@
 		<VBox>
 			<children>
 				<ComboBox fx:id="selectionQuestionnaire"
-					promptText="Sélection Questionnaire" />
+					promptText="Select Survey" />
 				<Button fx:id="envoyer" layoutX="100.0" layoutY="100.0"
 					mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0"
 					text="Send" />

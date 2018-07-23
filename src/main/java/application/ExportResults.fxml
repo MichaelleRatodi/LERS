@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ComboBox layoutX="36.0" layoutY="53.0" prefWidth="150.0" promptText="Questionnaire 2" />
+      <ComboBox layoutX="36.0" layoutY="53.0" prefWidth="150.0" promptText="Survey 2" />
       <CheckBox layoutX="152.0" layoutY="466.0" mnemonicParsing="false" text="Hierarchical Direction" />
       <CheckBox layoutX="150.0" layoutY="516.0" mnemonicParsing="false" text="Human Resources" />
       <CheckBox layoutX="150.0" layoutY="569.0" mnemonicParsing="false" text="All Employees" />

@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="scrollPane" maxHeight="-Infinity"
+<ScrollPane maxHeight="-Infinity"
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 	prefHeight="887.0" prefWidth="758.0"
 	xmlns="http://javafx.com/javafx/8.0.181"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="application.documents.DocumentsViewController">
-	<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity"
+	<Pane maxHeight="-Infinity" maxWidth="-Infinity"
 		minHeight="-Infinity" minWidth="-Infinity" prefHeight="887.0"
 		prefWidth="758.0">
 		<children>

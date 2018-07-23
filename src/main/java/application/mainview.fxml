@@ -59,12 +59,7 @@
 										<Image url="@./images/document-open-5.png" />
 									</image>
 								</ImageView>
-								<Label text="Create">
-									<font>
-										<Font name="System Bold" size="14.0" />
-									</font>
-								</Label>
-								<Label text="Questionnaire">
+								<Label text="Create Survey">
 									<font>
 										<Font name="System Bold" size="14.0" />
 									</font>
@@ -85,12 +80,7 @@
 										<Image url="@images/agenda.png" />
 									</image>
 								</ImageView>
-								<Label text="Fill in">
-									<font>
-										<Font name="System Bold" size="14.0" />
-									</font>
-								</Label>
-								<Label text="Questionnaire">
+								<Label text="Fill in Survey">
 									<font>
 										<Font name="System Bold" size="14.0" />
 									</font>
@@ -111,12 +101,7 @@
 										<Image url="@images/agenda.png" />
 									</image>
 								</ImageView>
-								<Label text="Send">
-									<font>
-										<Font name="System Bold" size="14.0" />
-									</font>
-								</Label>
-								<Label text="Questionnaire">
+								<Label text="Send Survey">
 									<font>
 										<Font name="System Bold" size="14.0" />
 									</font>
