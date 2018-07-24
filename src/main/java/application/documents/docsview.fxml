@@ -7,109 +7,147 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane prefHeight="809.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.documents.DocumentsViewController">
-  <children>
-      <VBox prefHeight="725.0" prefWidth="937.0">
-         <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="602.0">
-               <children>
-                  <ImageView fx:id="img" fitHeight="80.0" fitWidth="179.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/logo-msn-messenger-mac.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox prefHeight="43.0" prefWidth="708.0">
-               <children>
-                  <ImageView fx:id="home" fitHeight="80.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/720355.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox prefHeight="614.0" prefWidth="1214.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="614.0" prefWidth="337.0" spacing="20.0">
-                     <children>
-                        <ImageView fx:id="newFile" fitHeight="152.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/Files-New-File-icon.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="87.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/editor_copy_duplicate_file_files_text-512.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="saveFile" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/souvgad.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="73.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/folder-icon.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="66.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/search-file-icon-32031.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="listeQuestions" prefHeight="520.0" prefWidth="1114.0">
-                     <children>
-                        <HBox prefHeight="26.0" prefWidth="822.0" spacing="20.0">
-                           <children>
-                              <Button fx:id="addQuestion" mnemonicParsing="false" text="Add question" />
-                              <TextField fx:id="formTitle" prefHeight="25.0" prefWidth="400.0" promptText="Form title" />
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <TitledPane animated="false" collapsible="true" prefHeight="310.0" prefWidth="810.0" text="Question">
-                          <content>
-                            <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="800.0">
-                                 <children>
-                                    <TextField fx:id="questionLabel" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="500.0" promptText="Wording question" />
-                                    <RadioButton fx:id="multipleChoice" layoutX="23.0" layoutY="56.0" mnemonicParsing="false" selected="true" text="Multiple choices Question">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="choicetype" />
-                                       </toggleGroup>
-                                     </RadioButton>
-                                    <TextField fx:id="addLabelChoice" layoutX="41.0" layoutY="88.0" prefHeight="26.0" prefWidth="200.0" promptText="Choice answer example" text="" />
-                                    <Button fx:id="addChoice" layoutX="41.0" layoutY="125.0" mnemonicParsing="false" text="Add choice" />
-                                    <RadioButton fx:id="freeChoice" layoutX="23.0" layoutY="162.0" mnemonicParsing="false" text="Free answer question" toggleGroup="$choicetype" />
-                                    <Label layoutX="41.0" layoutY="192.0" text="Columns" />
-                                    <Label layoutX="41.0" layoutY="222.0" text="Rows" />
-                                    <TextField fx:id="freeAnswerWidth" layoutX="103.0" layoutY="188.0" prefHeight="26.0" prefWidth="59.0" promptText="Width" text="" />
-                                    <TextField fx:id="freeAnswerHeigth" layoutX="103.0" layoutY="218.0" prefHeight="26.0" prefWidth="59.0" promptText="Height" text="" />
-                                  </children>
-                              </AnchorPane>
-                          </content>
-                        </TitledPane>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-  </children>
-  <padding>
-    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-  </padding>
-</StackPane>
+<ScrollPane maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="887.0" prefWidth="758.0"
+	xmlns="http://javafx.com/javafx/8.0.181"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.documents.DocumentsViewController">
+	<Pane maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="887.0"
+		prefWidth="758.0">
+		<children>
+			<VBox prefHeight="725.0" prefWidth="937.0">
+				<children>
+					<HBox alignment="TOP_RIGHT" prefHeight="100.0"
+						prefWidth="602.0">
+						<children>
+							<ImageView fx:id="img" fitHeight="80.0"
+								fitWidth="179.0" nodeOrientation="RIGHT_TO_LEFT"
+								pickOnBounds="true" preserveRatio="true">
+								<image>
+									<Image url="@../images/logo-msn-messenger-mac.png" />
+								</image>
+							</ImageView>
+						</children>
+					</HBox>
+					<HBox prefHeight="43.0" prefWidth="708.0">
+						<children>
+							<ImageView fx:id="home" fitHeight="80.0"
+								fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
+								<image>
+									<Image url="@../images/720355.png" />
+								</image>
+							</ImageView>
+						</children>
+					</HBox>
+					<HBox prefHeight="614.0" prefWidth="1214.0">
+						<children>
+							<VBox alignment="CENTER" prefHeight="614.0"
+								prefWidth="337.0" spacing="20.0">
+								<children>
+									<ImageView fx:id="newFile" fitHeight="152.0"
+										fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+										<image>
+											<Image url="@../images/Files-New-File-icon.png" />
+										</image>
+									</ImageView>
+									<ImageView fitHeight="87.0" fitWidth="102.0"
+										pickOnBounds="true" preserveRatio="true">
+										<image>
+											<Image
+												url="@../images/editor_copy_duplicate_file_files_text-512.png" />
+										</image>
+									</ImageView>
+									<ImageView fx:id="saveFile" fitHeight="68.0"
+										fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+										<image>
+											<Image url="@../images/souvgad.png" />
+										</image>
+									</ImageView>
+									<ImageView fitHeight="73.0" fitWidth="71.0"
+										pickOnBounds="true" preserveRatio="true">
+										<image>
+											<Image url="@../images/folder-icon.png" />
+										</image>
+									</ImageView>
+									<ImageView fitHeight="66.0" fitWidth="86.0"
+										pickOnBounds="true" preserveRatio="true">
+										<image>
+											<Image url="@../images/search-file-icon-32031.png" />
+										</image>
+									</ImageView>
+								</children>
+								<padding>
+									<Insets bottom="50.0" left="50.0" right="50.0"
+										top="50.0" />
+								</padding>
+							</VBox>
+							<VBox fx:id="listeQuestions" prefHeight="520.0"
+								prefWidth="1114.0">
+								<children>
+									<HBox prefHeight="26.0" prefWidth="822.0" spacing="20.0">
+										<children>
+											<Button fx:id="addQuestion" mnemonicParsing="false"
+												text="Add question" />
+											<TextField fx:id="formTitle" prefHeight="25.0"
+												prefWidth="400.0" promptText="Form title" />
+										</children>
+										<padding>
+											<Insets bottom="10.0" left="10.0" right="10.0"
+												top="10.0" />
+										</padding>
+									</HBox>
+									<TitledPane animated="false" collapsible="true"
+										prefHeight="310.0" prefWidth="810.0" text="Question">
+										<content>
+											<AnchorPane fx:id="questionPane" minHeight="0.0"
+												minWidth="0.0" prefHeight="300.0" prefWidth="800.0">
+												<children>
+													<TextField fx:id="questionLabel" layoutX="14.0"
+														layoutY="14.0" prefHeight="26.0" prefWidth="500.0"
+														promptText="Wording question" />
+													<RadioButton fx:id="multipleChoice"
+														layoutX="23.0" layoutY="56.0" mnemonicParsing="false"
+														selected="true" text="Multiple choices Question">
+														<toggleGroup>
+															<ToggleGroup fx:id="choicetype" />
+														</toggleGroup>
+													</RadioButton>
+													<TextField fx:id="addLabelChoice" layoutX="41.0"
+														layoutY="88.0" prefHeight="26.0" prefWidth="200.0"
+														promptText="Choice answer example" text="" />
+													<Button fx:id="addChoice" layoutX="41.0"
+														layoutY="125.0" mnemonicParsing="false" text="Add choice" />
+													<RadioButton fx:id="freeChoice" layoutX="23.0"
+														layoutY="162.0" mnemonicParsing="false"
+														text="Free answer question" toggleGroup="$choicetype" />
+													<Label layoutX="41.0" layoutY="192.0" text="Columns" />
+													<Label layoutX="41.0" layoutY="222.0" text="Rows" />
+													<TextField fx:id="freeAnswerWidth"
+														layoutX="103.0" layoutY="188.0" prefHeight="26.0"
+														prefWidth="59.0" promptText="Width" text="" />
+													<TextField fx:id="freeAnswerHeigth"
+														layoutX="103.0" layoutY="218.0" prefHeight="26.0"
+														prefWidth="59.0" promptText="Height" text="" />
+												</children>
+											</AnchorPane>
+										</content>
+									</TitledPane>
+								</children>
+							</VBox>
+						</children>
+					</HBox>
+				</children>
+			</VBox>
+		</children>
+	</Pane>
+</ScrollPane>

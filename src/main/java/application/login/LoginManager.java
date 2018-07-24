@@ -52,7 +52,7 @@ public class LoginManager {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("passwordForgotten.fxml"));
 			scene.setRoot((Parent) loader.load());
 			LoginController controller = loader.<LoginController>getController();
-			controller.initManager(this);
+			controller.initManagerPF(this);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}

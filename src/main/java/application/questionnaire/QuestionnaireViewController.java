@@ -1,147 +1,232 @@
 package application.questionnaire;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.TreeMap;
 
+import application.MainViewController;
+import application.login.LoginManager;
 import entity.AccesBDD;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import model.Choix;
 import model.Question;
+import model.QuestionChoix;
+import model.QuestionTexte;
 import model.Questionnaire;
+import model.RH;
 import model.Reponse;
 
-public class QuestionnaireViewController implements Initializable {
+public class QuestionnaireViewController extends MainViewController {
 	
+	@FXML
+	private ScrollPane scrollPane = new ScrollPane();
 	@FXML
 	private Pane pane = new Pane();
 	@FXML
-	private TextArea nom = new TextArea();
-	@FXML
-	private TextArea prenom = new TextArea();
-	@FXML
-	private TextArea question1 = new TextArea();
-	@FXML
-	private CheckBox choix1a = new CheckBox();
-	@FXML
-	private CheckBox choix1b = new CheckBox();
-	@FXML
-	private CheckBox choix1c = new CheckBox();
-	@FXML
-	private TextArea question2 = new TextArea();
-	@FXML
-	private TextArea reponse2 = new TextArea();
-	@FXML
-	private TextArea question3 = new TextArea();
-	@FXML
-	private CheckBox choix3a = new CheckBox();
-	@FXML
-	private CheckBox choix3b = new CheckBox();
-	@FXML
-	private CheckBox choix3c = new CheckBox();
-	@FXML
-	private TextArea question4 = new TextArea();
-	@FXML
-	private TextArea reponse4 = new TextArea();
-	@FXML
-	private TextArea question5 = new TextArea();
-	@FXML
-	private CheckBox choix5a = new CheckBox();
-	@FXML
-	private CheckBox choix5b = new CheckBox();
-	@FXML
-	private CheckBox choix5c = new CheckBox();
-	@FXML
-	private TextArea question6 = new TextArea();
-	@FXML
-	private TextArea reponse6 = new TextArea();
-	@FXML
-	private TextArea question7 = new TextArea();
-	@FXML
-	private CheckBox choix7a = new CheckBox();
-	@FXML
-	private CheckBox choix7b = new CheckBox();
-	@FXML
-	private CheckBox choix7c = new CheckBox();
-	@FXML
-	private TextArea question8 = new TextArea();
-	@FXML
-	private TextArea reponse8 = new TextArea();
-	@FXML
-	private TextArea question9 = new TextArea();
-	@FXML
-	private RadioButton choix9a = new RadioButton();
-	@FXML
-	private RadioButton choix9b = new RadioButton();
-	@FXML
-	private TextArea question10 = new TextArea();
-	@FXML
-	private TextArea reponse10 = new TextArea();
+	private Label nom = new Label();
 	@FXML
 	private Button envoyer = new Button();
+	@FXML
+	private Button retour = new Button();
 	
-	private Reponse reponses;
-
+	private int questId = 0;
+	
 	public QuestionnaireViewController() {
 		
 	}
 	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initializeQuestionnaire(LoginManager loginManager, RH user, String questTitre) {
 		
-//		AccesBDD abdd = AccesBDD.getInstance();
-//		abdd.remplirBDD();
-//		Statement st;
-		
-		//pour récupérer les questions de la base de données
-		AccesBDD abdd = AccesBDD.getInstance();
-		Questionnaire quest = new Questionnaire();
-		List<Question> listeQuest = new ArrayList<Question>();
 		try {
-			quest = abdd.recupererObjetParId(new Questionnaire(), 1);
-			listeQuest = (List<Question>) abdd.recupererTousObjets(new Question());
+			AccesBDD abdd = AccesBDD.getInstance();
+			for (Questionnaire quest : abdd.recupererTousObjets(new Questionnaire()))
+				if (quest.getTitre().equals(questTitre))
+					this.questId = quest.getQuestionnaire_id();
+				
+			initialize(loginManager, user);
+			
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		//pour faire le tri des questions dont on a besoin
-		for(int i=listeQuest.size()-1;i > 0;i--)
-			if (listeQuest.get(i).getQuestionnaire_id() != quest.getQuestionnaire_id())
-				listeQuest.remove(i);
+	}
+	
+	@Override
+	public void initialize(LoginManager loginManager, RH user) {
 		
-		question1.setText(listeQuest.get(0).getLibelle());
-		question2.setText(listeQuest.get(1).getLibelle());
-		question3.setText(listeQuest.get(2).getLibelle());
-		question4.setText(listeQuest.get(3).getLibelle());
-		question5.setText(listeQuest.get(4).getLibelle());
-		question6.setText(listeQuest.get(5).getLibelle());
-		question7.setText(listeQuest.get(6).getLibelle());
-		question8.setText(listeQuest.get(7).getLibelle());
-		question9.setText(listeQuest.get(8).getLibelle());
-		question10.setText(listeQuest.get(9).getLibelle());
+		AccesBDD abdd = AccesBDD.getInstance();
+		TreeMap<Integer, Object> mapQuestions = new TreeMap<Integer, Object>();
+		List<Question> listeQuestions = new ArrayList<Question>();
+		List<QuestionChoix> listeQuestionsC = new ArrayList<QuestionChoix>();
+		List<QuestionTexte> listeQuestionsT = new ArrayList<QuestionTexte>();
+		Questionnaire quest = new Questionnaire();
+		try {
+			if (questId == 0)
+				quest = abdd.recupererObjetParId(new Questionnaire(), 1);
+			else
+				quest = abdd.recupererObjetParId(new Questionnaire(), questId);
+			listeQuestions = (List<Question>) abdd.recupererTousObjets(new Question());
+			listeQuestionsC = (List<QuestionChoix>) abdd.recupererTousObjets(new QuestionChoix());
+			listeQuestionsT = (List<QuestionTexte>) abdd.recupererTousObjets(new QuestionTexte());
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
+		nom.setText(quest.getTitre());
+		
+		// pour faire le tri des questions dont on a besoin
+		for (int i = listeQuestions.size() - 1; i >= 0; i--)
+			if (listeQuestions.get(i).getQuestionnaire_id() != quest.getQuestionnaire_id())
+				listeQuestions.remove(i);
+			
+		for (int i = 0; i < listeQuestions.size(); i++)
+			for (int ii = 0; ii < listeQuestionsC.size(); ii++)
+				if (listeQuestions.get(i).getQuestion_id() == listeQuestionsC.get(ii).getQuestion_id())
+					mapQuestions.put(listeQuestionsC.get(ii).getQuestion_id(), listeQuestionsC.get(ii));
+		
+		for (int i = 0; i < listeQuestions.size(); i++)
+			for (int ii = 0; ii < listeQuestionsT.size(); ii++)
+				if (listeQuestions.get(i).getQuestion_id() == listeQuestionsT.get(ii).getQuestion_id())
+					mapQuestions.put(listeQuestionsT.get(ii).getQuestion_id(), listeQuestionsT.get(ii));
+				
+		listeQuestionsC.clear();
+		listeQuestionsT.clear();
+		
+		int parcours = 100;
+		for (Object obj : mapQuestions.values()) {
+			
+			Label newLabel = new Label();
+			newLabel.setText(((Question) obj).getLibelle());
+			newLabel.setLayoutX(50);
+			newLabel.setLayoutY(parcours);
+			newLabel.setId("" + ((Question) obj).getQuestion_id());
+			
+			parcours += 20;
+			
+			pane.getChildren().add(newLabel);
+			
+			if (obj.getClass().getSimpleName().equals("QuestionTexte")) {
+				
+				QuestionTexte qt = (QuestionTexte) obj;
+				TextField newTF = new TextField();
+				newTF.setPrefWidth(20 * qt.getNbColonnesZoneTexte());
+				newTF.setPrefHeight(20 * qt.getNbLignesZoneTexte());
+				newTF.setLayoutX(50);
+				newTF.setLayoutY(parcours);
+				pane.getChildren().add(newTF);
+				parcours += newTF.getPrefHeight() + 20;
+				
+			} else {
+				
+				QuestionChoix qt = (QuestionChoix) obj;
+				List<Choix> listeChoix = new ArrayList<Choix>();
+				try {
+					listeChoix = abdd.recupererTousObjets(new Choix());
+				} catch (InstantiationException | IllegalAccessException e) {
+					e.printStackTrace();
+				}
+				
+				for (int i = listeChoix.size() - 1; i >= 0; i--)
+					if (listeChoix.get(i).getChoix_id() != qt.getChoix_id())
+						listeChoix.remove(i);
+					
+				int parcoursH = 50;
+				if (qt.getPlusieursChoix()) {
+					for (int i = 0; i < listeChoix.size(); i++) {
+						CheckBox cb = new CheckBox();
+						cb.setText(listeChoix.get(i).getLibelle());
+						cb.setLayoutX(parcoursH);
+						cb.setLayoutY(parcours + 10);
+						parcoursH += 7 * cb.getText().length() + 40;
+						pane.getChildren().add(cb);
+					}
+				} else {
+					ToggleGroup tg = new ToggleGroup();
+					for (int i = 0; i < listeChoix.size(); i++) {
+						RadioButton rb = new RadioButton();
+						rb.setText(listeChoix.get(i).getLibelle());
+						rb.setLayoutX(parcoursH);
+						rb.setLayoutY(parcours + 10);
+						rb.setToggleGroup(tg);
+						parcoursH += 7 * rb.getText().length() + 40;
+						pane.getChildren().add(rb);
+					}
+				}
+				parcours += 40;
+			}
+		}
+		
+		envoyer.setLayoutY(parcours + 30);
+		envoyer.setStyle("-fx-border-color:green;-fx-border-width:2px");
+		
+		pane.setPrefHeight(parcours + 100);
 		
 		envoyer.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				sendFunction(reponses);
+				sendFunction(user);
+				loginManager.showMainView(user);
 			}
-
 			
+		});
+		
+		retour.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				
+				loginManager.showMainView(user);
+			}
 		});
 	}
 	
-	// pour insérer les réponses dans la table Reponse
-	private void sendFunction(Reponse reponses) {
-				
-			AccesBDD abdd = AccesBDD.getInstance();
-			abdd.insererObjet(reponses);
+	private void sendFunction(RH user) {
+		// pour insérer les réponses dans la table Reponse
+		AccesBDD abdd = AccesBDD.getInstance();
+		
+		List<Node> listeNodes = pane.getChildren();
+		for (int i = 3; i < listeNodes.size(); i++) {
+			
+			if (listeNodes.get(i).getClass().getSimpleName().equals("Label")) {
+				int questionId = Integer.parseInt(((Label) listeNodes.get(i)).getId());
+				Reponse reponse = new Reponse();
+				reponse.setQuestion_id(questionId);
+				reponse.setPersonnel_id(user.getPersonnel_id());
+				i++;
+				if (listeNodes.get(i).getClass().getSimpleName().equals("TextField")) {
+					reponse.setContenuReponse(((TextField) listeNodes.get(i)).getText());
+				} else if (listeNodes.get(i).getClass().getSimpleName().equals("RadioButton")) {
+					do {
+						RadioButton radio = (RadioButton) listeNodes.get(i);
+						if (radio.isSelected())
+							reponse.setContenuReponse(radio.getText());
+					} while (++i < listeNodes.size()
+							&& listeNodes.get(i).getClass().getSimpleName().equals("RadioButton"));
+					i--;
+				} else {
+					do {
+						CheckBox check = (CheckBox) listeNodes.get(i);
+						if (check.isSelected()) {
+							if (reponse.getContenuReponse() == null)
+								reponse.setContenuReponse(check.getText());
+							else
+								reponse.setContenuReponse(reponse.getContenuReponse() + "|" + check.getText());
+						}
+					} while (++i < listeNodes.size()
+							&& listeNodes.get(i).getClass().getSimpleName().equals("CheckBox"));
+					i--;
+				}
+				abdd.insererObjet(reponse);
+			}
 		}
+	}
 }
-

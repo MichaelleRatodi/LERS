@@ -1,15 +1,16 @@
 package application;
 
-import java.time.LocalDate;
-import java.util.List;
+//import java.time.LocalDate;
 
-import entity.AccesBDD;
+//import java.util.List;
+
+//import entity.AccesBDD;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Questionnaire;
+//import model.Questionnaire;
 
 public class Projet extends Application {
 	@Override
@@ -21,7 +22,7 @@ public class Projet extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			AccesBDD abdd = AccesBDD.getInstance();
+			//AccesBDD abdd = AccesBDD.getInstance();
 //			abdd.createBDD();
 //			abdd.remplirBDD();
 		} catch(Exception e) {

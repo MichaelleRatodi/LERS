@@ -1,6 +1,5 @@
 package application.login;
 
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,6 +17,10 @@ public class LoginController {
 	private TextField password;
 	@FXML
 	private Button loginButton;
+	@FXML
+	private Button backButton;
+	@FXML
+	private Button exitButton;
 	@FXML
 	private Hyperlink hyperlink = new Hyperlink();
 	
@@ -43,6 +46,23 @@ public class LoginController {
 			public void handle(ActionEvent e) {
 				System.out.println("Forgot your password link is clicked");
 				loginManager.passwordForgotten();
+			}
+		});
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
+			}
+		});
+	}
+	
+	public void initManagerPF(final LoginManager loginManager) {
+		
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				System.out.println("Forgot your password link is clicked");
+				loginManager.showLoginScreen();
 			}
 		});
 	}

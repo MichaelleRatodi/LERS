@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author Apprenant
- *
- */
-package entity;

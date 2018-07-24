@@ -1,63 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="887.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.questionnaire.QuestionnaireViewController">
-   <children>
-      <CheckBox fx:id="choix1c" layoutX="402.0" layoutY="100.0" mnemonicParsing="false" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font></CheckBox>
-      <CheckBox fx:id="choix1b" layoutX="204.0" layoutY="101.0" mnemonicParsing="false" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="choix1a" layoutX="45.0" layoutY="100.0" mnemonicParsing="false" />
-      <TextArea fx:id="question10" layoutX="21.0" layoutY="773.0" prefHeight="38.0" prefWidth="673.0" />
-      <CheckBox fx:id="choix3c" layoutX="409.0" layoutY="270.0" mnemonicParsing="false" textAlignment="CENTER" />
-      <CheckBox fx:id="choix3b" layoutX="211.0" layoutY="271.0" mnemonicParsing="false" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="choix3a" layoutX="52.0" layoutY="270.0" mnemonicParsing="false" />
-      <TextArea fx:id="question3" layoutX="21.0" layoutY="228.0" prefHeight="38.0" prefWidth="673.0" />
-      <CheckBox fx:id="choix5c" layoutX="408.0" layoutY="436.0" mnemonicParsing="false" textAlignment="CENTER" />
-      <CheckBox fx:id="choix5b" layoutX="210.0" layoutY="437.0" mnemonicParsing="false" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="choix5a" layoutX="51.0" layoutY="436.0" mnemonicParsing="false" />
-      <TextArea fx:id="question5" layoutX="20.0" layoutY="394.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="question2" layoutX="21.0" layoutY="121.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="reponse2" layoutX="23.0" layoutY="168.0" prefHeight="49.0" prefWidth="673.0" />
-      <TextArea fx:id="question4" layoutX="20.0" layoutY="292.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="reponse4" layoutX="20.0" layoutY="334.0" prefHeight="49.0" prefWidth="673.0" />
-      <TextArea fx:id="nom" layoutX="22.0" layoutY="14.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="question9" layoutX="23.0" layoutY="716.0" prefHeight="38.0" prefWidth="673.0" />
-      <RadioButton fx:id="choix9a" layoutX="53.0" layoutY="756.0" mnemonicParsing="false" />
-      <RadioButton fx:id="choix9b" layoutX="134.0" layoutY="755.0" mnemonicParsing="false" />
-      <TextArea fx:id="question1" layoutX="20.0" layoutY="58.0" prefHeight="38.0" prefWidth="673.0" />
-      <Button fx:id="envoyer" layoutX="609.0" layoutY="858.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Send" />
-      <TextArea fx:id="reponse10" layoutX="21.0" layoutY="814.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="question6" layoutX="20.0" layoutY="460.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="reponse6" layoutX="20.0" layoutY="502.0" prefHeight="49.0" prefWidth="673.0" />
-      <CheckBox fx:id="choix7c" layoutX="409.0" layoutY="599.0" mnemonicParsing="false" textAlignment="CENTER" />
-      <CheckBox fx:id="choix7b" layoutX="211.0" layoutY="600.0" mnemonicParsing="false" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="choix7a" layoutX="52.0" layoutY="599.0" mnemonicParsing="false" />
-      <TextArea fx:id="question7" layoutX="21.0" layoutY="557.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="question8" layoutX="21.0" layoutY="623.0" prefHeight="38.0" prefWidth="673.0" />
-      <TextArea fx:id="reponse8" layoutX="21.0" layoutY="665.0" prefHeight="49.0" prefWidth="673.0" />
-   </children>
-</Pane>
+<ScrollPane fx:id="scrollPane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="887.0" prefWidth="758.0"
+	xmlns="http://javafx.com/javafx/8.0.181"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.questionnaire.QuestionnaireViewController">
+	<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity"
+		minHeight="-Infinity" minWidth="-Infinity" prefHeight="887.0"
+		prefWidth="758.0">
+		<children>
+			<Label fx:id="nom" layoutX="75.0" layoutY="20.0"
+				prefHeight="38.0" prefWidth="673.0">
+				<font>
+					<Font name="System Bold" size="20.0" />
+				</font>
+			</Label>
+			<Button fx:id="retour" layoutX="500.0" layoutY="20.0"
+				mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0"
+				text="Retour" />
+
+			<Button fx:id="envoyer" layoutX="100.0" layoutY="100.0"
+				mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0"
+				text="Send" />
+		</children>
+	</Pane>
+</ScrollPane>

@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.DriverManager;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import model.Question;
 import model.QuestionChoix;
 import model.QuestionTexte;
 import model.Questionnaire;
+import model.QuestionnairePersonnel;
 import model.RH;
 import model.Reponse;
 
@@ -228,6 +230,12 @@ public class AccesBDD {
 			for (int i = 0; i < arguments.length; i++) {
 				String columnType = rsmd.getColumnTypeName(i + 1);
 				switch (columnType) {
+				case "bool":
+					method = objet.getClass().getDeclaredMethod(
+							"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
+							boolean.class);
+					method.invoke(objet, rs.getBoolean(i + 1));
+					break;
 				case "serial":
 				case "int4":
 					method = objet.getClass().getDeclaredMethod(
@@ -236,6 +244,7 @@ public class AccesBDD {
 					method.invoke(objet, rs.getInt(i + 1));
 					break;
 				case "varchar":
+				case "text":
 					method = objet.getClass().getDeclaredMethod(
 							"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
 							String.class);
@@ -268,6 +277,7 @@ public class AccesBDD {
 			Method method;
 			method = objet.getClass().getDeclaredMethod("getFields");
 			String[] arguments = (String[]) method.invoke(objet);
+			
 			Statement st;
 			st = connection.createStatement();
 			ResultSet rs = st.executeQuery(requete.toString());
@@ -278,7 +288,14 @@ public class AccesBDD {
 				T item = (T) objet.getClass().newInstance();
 				for (int i = 0; i < arguments.length; i++) {
 					String columnType = rsmd.getColumnTypeName(i + 1);
+					
 					switch (columnType) {
+					case "bool":
+						method = item.getClass().getDeclaredMethod(
+								"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
+								boolean.class);
+						method.invoke(item, rs.getBoolean(i + 1));
+						break;
 					case "serial":
 					case "int4":
 						method = item.getClass().getDeclaredMethod(
@@ -287,6 +304,7 @@ public class AccesBDD {
 						method.invoke(item, rs.getInt(i + 1));
 						break;
 					case "varchar":
+					case "text":
 						method = item.getClass().getDeclaredMethod(
 								"set" + Character.toUpperCase(arguments[i].charAt(0)) + arguments[i].substring(1),
 								String.class);
@@ -355,6 +373,8 @@ public class AccesBDD {
 			
 			st.execute(ListePersonnel.getSchema());
 			
+			st.execute(QuestionnairePersonnel.getSchema());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -362,7 +382,7 @@ public class AccesBDD {
 	
 	public void remplirBDD() {
 		try (Statement st = connection.createStatement()) {
-			ResultSet result = st.executeQuery("select count(*) AS nb from RH");
+			ResultSet result = st.executeQuery("select count(*) as nb from RH");
 			result.next();
 			if (result.getInt("nb") == 0) {
 				st.executeUpdate("insert into RH values\r\n"
@@ -371,69 +391,62 @@ public class AccesBDD {
 						+ "(3, 'Themelin', 'Mathieu', 'mat.themelin@hotmail.fr', 'RH', 'mathieu', 'mathieu', 3)");
 				
 				st.executeUpdate(
-						"insert into Personnel values \r\n" + "(4, 'Hugo' ,'LLORIS','hugo@gmail.com', 'RH'),\r\n"
-								+ "(5, 'Benjamin','PAVARD', 'berjamin@gmail.com', 'IT manager'),\r\n"
-								+ "(6, 'Lucas','HERNANDEZ', 'lucas.tata@gmail.com', 'employee1'),\r\n"
-								+ "(7, 'Steve' ,'MANDANDA', 'steve.tata@gmail.com', 'employee2'),\r\n"
-								+ "(8, 'Benjamin','MENDY', 'b2@gmail.com', 'employee3'),\r\n"
-								+ "(9, 'Samuel','UMTITI', 's1.tata@gmail.com', 'employee4'),\r\n"
-								+ "(10, 'Adil','RAMI', 'a.r@gmail.com', 'employee5'),\r\n"
-								+ "(11, 'Olivier','GIROUD', 'o.g.tata@gmail.com', 'employee6'),\r\n"
-								+ "(12, 'Nabil','FEKIR', 'n.f@gmail.com', 'employee7'),\r\n"
-								+ "(13, 'Steven','NZONZI', 's.n@gmail.com', 'employee8')");
+						"insert into Personnel values \r\n" + "(4, 'LLORIS' ,'Hugo','hugo@gmail.com', 'RH'),\r\n"
+								+ "(5, 'PAVARD','Benjamin', 'berjamin@gmail.com', 'IT manager'),\r\n"
+								+ "(6, 'HERNANDEZ','Lucas', 'lucas.tata@gmail.com', 'employee1'),\r\n"
+								+ "(7, 'MANDANDA' ,'Steve', 'steve.tata@gmail.com', 'employee2'),\r\n"
+								+ "(8, 'MENDY','Benjamin', 'b2@gmail.com', 'employee3'),\r\n"
+								+ "(9, 'UMTITI','Samuel', 's1.tata@gmail.com', 'employee4'),\r\n"
+								+ "(10, 'RAMI','Adil', 'a.r@gmail.com', 'employee5'),\r\n"
+								+ "(11, 'GIROUD','Olivier', 'o.g.tata@gmail.com', 'employee6'),\r\n"
+								+ "(12, 'FEKIR','Nabil', 'n.f@gmail.com', 'employee7'),\r\n"
+								+ "(13, 'NZONZI','Steven', 's.n@gmail.com', 'employee8')");
 				
 				st.executeUpdate("insert into Questionnaire values\r\n"
-					+"(1,'Employees Opinions','2018-07-18', '2018-07-30', 7),\r\n"
-					+"(2,'Employees Survey','2018-07-18', '2018-07-30', 7),\r\n"
-					+"(3,'Work Optimization','2018-07-18', '2018-07-30', 7)");
-			
+						+ "(1,'Employees Opinions','2018-07-18', '2018-07-30', 7),\r\n"
+						+ "(2,'Work Optimization','2018-07-18', '2018-07-30', 7)");
+				
 				st.executeUpdate("insert into QuestionChoix values\r\n"
 						+ "(1,1,'What do you think about the management of the enterprise ?',1,false),\r\n"
 						+ "(3,1,'What do you think about the operation of the enterprise ?',3,false),\r\n"
 						+ "(5,1,'What do you think about the collaboration with colleagues in the enterprise ?',5,false),\r\n"
 						+ "(7,1,'What do you think about your workspace ?',7,false),\r\n"
-						+ "(9,1,'Are you satisfied with the available tools ?',9,false)");
+						+ "(9,1,'Are you satisfied with the available tools ?',9,false),\r\n"
+						+ "(11,1,'Which aspects of the entreprise are you satisfied with ?',11,true)");
 				
 				st.executeUpdate("insert into QuestionTexte values\r\n"
 						+ "(2,1,'Explain your answer about the management',80,4),\r\n"
 						+ "(4,1,'Explain your answer about the operation',80,4),\r\n"
 						+ "(6,1,'Explain your answer about the collaboration',80,4),\r\n"
 						+ "(8,1,'Explain your answer about the workspace',80,4),\r\n"
-						+ "(10,1,'If not, explain why',80,4)");
+						+ "(10,1,'If not, explain why',50,2)");
+				
+				st.executeUpdate("insert into QuestionChoix values\r\n"
+						+ "(12,2,'What do you think about the workflow of the enterprise ?',12,false)");
+				
+				st.executeUpdate("insert into QuestionTexte values\r\n"
+						+ "(13,2,'What would you propose to improve the workflow of the entreprise ?',100,10)");
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		try (Statement st = connection.createStatement()) {
-
-			st.executeUpdate("insert into Choix values\r\n"
-				+"(1,'Very satisfied'),\r\n"
-				+"(1,'Moderately satisfied'),\r\n"
-				+"(1,'Unsatisfied'),\r\n"
-				+"(3,'Very satisfied'),\r\n"
-				+"(3,'Moderately satisfied'),\r\n"
-				+"(3,'Unsatisfied'),\r\n"
-				+"(5,'Very satisfied'),\r\n"
-				+"(5,'Moderately satisfied'),\r\n"
-				+"(5,'Unsatisfied'),\r\n"
-				+"(7,'Very satisfied'),\r\n"
-				+"(7,'Moderately satisfied'),\r\n"
-				+"(7,'Unsatisfied'),\r\n"
-				+"(9,'Yes'),\r\n"
-				+"(9,'No')");
-
-			st.executeUpdate("insert into Liste values\r\n"
-				+"(1,' All Employees '),\r\n"
-				+"(2,' Human Resources'),\r\n"
-				+"(3,' Hierarchical Direction ')");
-
+			
+			st.executeUpdate("insert into Liste values\r\n" + "(1,' All Employees '),\r\n"
+					+ "(2,' Human Resources'),\r\n" + "(3,' Hierarchical Direction ')");
 			
 			st.executeUpdate("insert into Choix values\r\n" + "(1,'Very satisfied'),\r\n"
 					+ "(1,'Moderately satisfied'),\r\n" + "(1,'Unsatisfied'),\r\n" + "(3,'Very satisfied'),\r\n"
 					+ "(3,'Moderately satisfied'),\r\n" + "(3,'Unsatisfied'),\r\n" + "(5,'Very satisfied'),\r\n"
 					+ "(5,'Moderately satisfied'),\r\n" + "(5,'Unsatisfied'),\r\n" + "(7,'Very satisfied'),\r\n"
-					+ "(7,'Moderately satisfied'),\r\n" + "(7,'Unsatisfied'),\r\n" + "(9,'Yes'),\r\n" + "(9,'No')");
+					+ "(7,'Moderately satisfied'),\r\n" + "(7,'Unsatisfied'),\r\n" + "(9,'Yes'),\r\n" + "(9,'No'),"
+					+ "(11,'Management'),\r\n" + "(11,'Operation'),\r\n" + "(11,'Collaboration'),\r\n"
+					+ "(11,'Workspace'),\r\n" + "(11,'Tools')");
+			
+			st.executeUpdate("insert into Choix values\r\n" + "(12,'Very satisfied'),\r\n"
+					+ "(12,'Moderately satisfied'),\r\n" + "(12,'Unsatisfied')");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -441,12 +454,44 @@ public class AccesBDD {
 		
 		try (Statement st = connection.createStatement()) {
 			
+			st.executeUpdate("insert into ListePersonnel (liste_id, personnel_id) values\r\n" + "(2,4),\r\n"
+					+ "(2,5),\r\n" + "(2,6),\r\n" + "(2,7),\r\n" + "(2,8),\r\n" + "(2,9),\r\n" + "(2,10),\r\n"
+					+ "(2,11),\r\n" + "(2,12),\r\n" + "(2,13)");
+			
+			st.executeUpdate(
+					"insert into ListePersonnel (liste_id, rh_id) values\r\n" + "(3,1),\r\n" + "(3,2),\r\n" + "(3,3)");
+			
 			st.executeUpdate("insert into ListePersonnel (liste_id, personnel_id) values\r\n" + "(1,4),\r\n"
 					+ "(1,5),\r\n" + "(1,6),\r\n" + "(1,7),\r\n" + "(1,8),\r\n" + "(1,9),\r\n" + "(1,10),\r\n"
 					+ "(1,11),\r\n" + "(1,12),\r\n" + "(1,13)");
 			
 			st.executeUpdate(
-					"insert into ListePersonnel (liste_id, rh_id) values\r\n" + "(2,1),\r\n" + "(2,2),\r\n" + "(2,3)");
+					"insert into ListePersonnel (liste_id, rh_id) values\r\n" + "(1,1),\r\n" + "(1,2),\r\n" + "(1,3)");
+			
+			st.executeUpdate("insert into QuestionnairePersonnel (questionnaire_id, personnel_id) values\r\n"
+					+ "(1,4),\r\n" + "(1,5),\r\n" + "(1,6),\r\n" + "(2,7),\r\n" + "(2,8),\r\n" + "(2,9)");
+			
+			st.executeUpdate("insert into Reponse (question_id, personnel_id, contenureponse) values\r\n"
+					+ "(1,4,'Moderately satisfied'),\r\n" + "(2,4,'Moderately satisfied'),\r\n"
+					+ "(3,4,'Very satisfied'),\r\n" + "(4,4,'Very satisfied'),\r\n" + "(5,4,'Very satisfied'),\r\n"
+					+ "(6,4,'Very satisfied'),\r\n" + "(7,4,'Unsatisfied'),\r\n" + "(8,4,'Unsatisfied'),\r\n"
+					+ "(9,4,'No'),\r\n" + "(10,4,'Not enough support'),\r\n" + "(11,4,'Collaboration|Workspace'),\r\n"
+					+ "(1,5,'Moderately satisfied'),\r\n" + "(2,5,'Moderately satisfied'),\r\n"
+					+ "(3,5,'Very satisfied'),\r\n" + "(4,5,'Very satisfied'),\r\n" + "(5,5,'Unsatisfied'),\r\n"
+					+ "(6,5,'Unsatisfied'),\r\n" + "(7,5,'Very satisfied'),\r\n" + "(8,5,'Very satisfied'),\r\n"
+					+ "(9,5,'Yes'),\r\n" + "(10,5,''),\r\n" + "(11,5,'Collaboration|Tools'),\r\n"
+					+ "(1,6,'Moderately satisfied'),\r\n" + "(2,6,'Moderately satisfied'),\r\n"
+					+ "(3,6,'Very satisfied'),\r\n" + "(4,6,'Very satisfied'),\r\n" + "(5,6,'Unsatisfied'),\r\n"
+					+ "(6,6,'Unsatisfied'),\r\n" + "(7,6,'Very satisfied'),\r\n" + "(8,6,'Very satisfied'),\r\n"
+					+ "(9,6,'Yes'),\r\n" + "(10,6,''),\r\n" + "(11,6,'Collaboration|Tools')\r\n");
+			
+			st.executeUpdate("insert into Reponse (question_id, personnel_id, contenureponse) values\r\n"
+					+ "(12,7,'Moderately satisfied'),\r\n"
+					+ "(13,7,'The tool support should be drastically improved'),\r\n"
+					+ "(12,8,'Moderately satisfied'),\r\n"
+					+ "(13,8,'The collaboration should be more human with less computer chatting'),\r\n"
+					+ "(12,9,'Unsatisfied'),\r\n"
+					+ "(13,9,'The entreprise should find a better text chatting software')\r\n");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
