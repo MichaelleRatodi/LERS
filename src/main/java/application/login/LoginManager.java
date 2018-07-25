@@ -49,7 +49,7 @@ public class LoginManager {
 	public void showPasswordForgotten() {
 		try {
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("passwordForgotten.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PasswordForgotten.fxml"));
 			scene.setRoot((Parent) loader.load());
 			LoginController controller = loader.<LoginController>getController();
 			controller.initManagerPF(this);
@@ -61,7 +61,7 @@ public class LoginManager {
 	public void showLoginScreen() {
 		try {
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
 			scene.setRoot((Parent) loader.load());
 			LoginController controller = loader.<LoginController>getController();
 			controller.initManager(this);
@@ -72,7 +72,7 @@ public class LoginManager {
 	
 	public void showMainView(RH user) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainview.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainView.fxml"));
 			scene.setRoot((Parent) loader.load());
 			Stage stage = (Stage) scene.getWindow();
 			stage.centerOnScreen();
@@ -86,7 +86,7 @@ public class LoginManager {
 	
 	public void showUserList(RH user) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../employee/employeeview.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../employee/EmployeeView.fxml"));
 			scene.setRoot((Parent) loader.load());
 			Stage stage = (Stage) scene.getWindow();
 			stage.centerOnScreen();
@@ -101,7 +101,7 @@ public class LoginManager {
 	
 	public void showUserInfo(RH user) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../users/userInfo.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../users/UserInfo.fxml"));
 			scene.setRoot((Parent) loader.load());
 			MainViewController controller = loader.<MainViewController>getController();
 			controller.initialize(this, user);

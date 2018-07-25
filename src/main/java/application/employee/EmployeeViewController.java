@@ -1,7 +1,6 @@
 package application.employee;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -206,7 +205,7 @@ public class EmployeeViewController extends MainViewController {
 		dialogVbox.getChildren().add(paneDelete);
 		scene = new Scene(dialogVbox, 400, 600);
 		detail.setScene(scene);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("employeedelete.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeDelete.fxml"));
 		try {
 			scene.setRoot((Parent) loader.load());
 		} catch (IOException e) {
@@ -228,7 +227,7 @@ public class EmployeeViewController extends MainViewController {
 		dialogVbox.getChildren().add(new Text("Nouveau Personnel"));
 		scene = new Scene(dialogVbox, 400, 600);
 		create.setScene(scene);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("employeecreate.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EmployeeCreate.fxml"));
 		try {
 			scene.setRoot((Parent) loader.load());
 		} catch (IOException e) {

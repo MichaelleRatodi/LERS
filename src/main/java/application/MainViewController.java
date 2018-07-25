@@ -135,7 +135,7 @@ public class MainViewController extends UserInfoController {
 	
 	private void showDocumentsView(LoginManager loginManager, RH user) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("./documents/docsview.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("./documents/DocumentsView.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());
 			DocumentsViewController controller = loader.<DocumentsViewController>getController();
 			controller.initialize(loginManager, user);
@@ -146,7 +146,7 @@ public class MainViewController extends UserInfoController {
 	
 	private void showEmployeeView(LoginManager loginManager, RH user) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("./employee/employeeview.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("./employee/EmployeeView.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());
 			EmployeeViewController controller = loader.<EmployeeViewController>getController();
 			controller.initialize(loginManager, user);
@@ -158,7 +158,7 @@ public class MainViewController extends UserInfoController {
 	
 	private void showStatisticsView(LoginManager loginManager, RH user) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("./statistics/statisticsview.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("./statistics/StatisticsView.fxml"));
 			loginManager.getScene().setRoot((Parent) loader.load());
 			StatisticsViewController controller = loader.<StatisticsViewController>getController();
 			controller.initialize(loginManager, user);
@@ -200,7 +200,7 @@ public class MainViewController extends UserInfoController {
 		dialogVbox.getChildren().add(new Text("Sélection Questionnaire"));
 		Scene scene = new Scene(dialogVbox, 400, 600);
 		create.setScene(scene);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("questionnaire/selectionquestionnaire.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("questionnaire/SelectionQuestionnaire.fxml"));
 		try {
 			scene.setRoot((Parent) loader.load());
 		} catch (IOException e) {
